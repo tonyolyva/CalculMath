@@ -21,18 +21,18 @@ CalculMath is a fully functional iOS calculator application built using Swift an
 * **SwiftUI:** Built with SwiftUI for a modern and declarative UI.
 
 ## Screenshots
-* **addition-positive-numbers**: 3 + 5 = 8 https://github.com/tonyolyva/CalculMath/Screenshots/addition-positive-numbers.png
-* **clear-button**: C -> 0 https://github.com/tonyolyva/CalculMath/Screenshots/clear-button.png
-* **division-by-zero-error**: 150 / 0 = ERROR https://github.com/tonyolyva/CalculMath/Screenshots/division-by-zero-error.png
-* **exponentiation-calculation**: 2^15 = 32,768 https://github.com/tonyolyva/CalculMath/Screenshots/exponentiation-calculation.png
-* **factorial-calculation**: 10! = 36288008 https://github.com/tonyolyva/CalculMath/Screenshots/factorial-calculation.png
-* **multiplication-decimals**: 2.25 * 5.55 = 7.75 https://github.com/tonyolyva/CalculMath/Screenshots/multiplication-decimals.png
-* **power-of-two-calculation**: 2 ^ 10 = 1,024 https://github.com/tonyolyva/CalculMath/Screenshots/power-of-two-calculation.png
-* **square-operation**: 4 ^ 2 = 16 https://github.com/tonyolyva/CalculMath/Screenshots/square-operation.png
-* **square-root-operation**: v 1024 = 32 https://github.com/tonyolyva/CalculMath/Screenshots/square-root-operation.png
-* **subtraction-negative-numbers**: 120 - 25 = -45 https://github.com/tonyolyva/CalculMath/Screenshots/subtraction-negative-numbers.png
-* **ui-tests-passed**: All UI tests Psss https://github.com/tonyolyva/CalculMath/Screenshots/ui-tests-passed.png
-* **unit-tests-passed**: All Unit tests Pass https://github.com/tonyolyva/CalculMath/Screenshots/.png
+* **addition-positive-numbers**: 3 + 5 = 8 https://github.com/tonyolyva/CalculMath/blob/main/Screenshots/addition-positive-numbers.png
+* **clear-button**: C -> 0 https://github.com/tonyolyva/CalculMath/blob/main/Screenshots/clear-button.png
+* **division-by-zero-error**: 150 / 0 = ERROR https://github.com/tonyolyva/CalculMath/blob/main/Screenshots/division-by-zero-error.png
+* **exponentiation-calculation**: 2^15 = 32,768 https://github.com/tonyolyva/CalculMath/blob/main/Screenshots/exponentiation-calculation.png
+* **factorial-calculation**: 10! = 36288008 https://github.com/tonyolyva/CalculMath/blob/main/Screenshots/factorial-calculation.png
+* **multiplication-decimals**: 2.25 * 5.55 = 7.75 https://github.com/tonyolyva/CalculMath/blob/main/Screenshots/multiplication-decimals.png
+* **power-of-two-calculation**: 2 ^ 10 = 1,024 https://github.com/tonyolyva/CalculMath/blob/main/Screenshots/power-of-two-calculation.png
+* **square-operation**: 4 ^ 2 = 16 https://github.com/tonyolyva/CalculMath/blob/main/Screenshots/square-operation.png
+* **square-root-operation**: v 1024 = 32 https://github.com/tonyolyva/CalculMath/blob/main/Screenshots/square-root-operation.png
+* **subtraction-negative-numbers**: 120 - 25 = -45 https://github.com/tonyolyva/CalculMath/blob/main/Screenshots/subtraction-negative-numbers.png
+* **ui-tests-passed**: All UI tests Psss https://github.com/tonyolyva/CalculMath/blob/main/Screenshots/ui-tests-passed.png
+* **unit-tests-passed**: All Unit tests Pass https://github.com/tonyolyva/CalculMath/blob/main/Screenshots/.png
 
 ## Installation
 1.  **Clone the repository:**
