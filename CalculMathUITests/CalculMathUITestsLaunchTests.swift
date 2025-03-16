@@ -1,10 +1,3 @@
-//
-//  CalculMathUITestsLaunchTests.swift
-//  CalculMathUITests
-//
-//  Created by Anatoliy Olyva on 3/13/25.
-//
-
 import XCTest
 
 final class CalculMathUITestsLaunchTests: XCTestCase {
