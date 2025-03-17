@@ -9,7 +9,7 @@ class CalculMathViewModel: ObservableObject {
     func buttonPressed(button: String) {
         print("buttonPressed: \(button)")
         print("currentOperand before: \(calculMath.currentOperand)")
-
+        
         if let digit = Int(button) {
             calculMath.inputDigit(digit)
             if let operand = Double(calculMath.inputBuffer) {
@@ -68,39 +68,38 @@ class CalculMathViewModel: ObservableObject {
                 } catch {
                     displayValue = "Error"
                 }
-//            case "2ˣ":
-//                let result = calculMath.powerOfTwo(calculMath.currentOperand)
-//                displayValue = formatResult(result)
-//                calculMath.currentOperand = result
-//                calculMath.setOperator("2ˣ")
-//                print("currentOperand after 2ˣ: \(calculMath.currentOperand)")
-//            case "2ˣ":
-//                if let result = try? calculMath.powerOfTwo(calculMath.currentOperand) {
-//                    displayValue = formatResult(result)
-//                    calculMath.currentOperand = result
-//                    calculMath.setOperator("2ˣ")
-//                    print("currentOperand after 2ˣ: \(calculMath.currentOperand)")
-//                } else {
-//                    // Handle the error (e.g., display an error message)
-//                    displayValue = "Error"
-//                }
+                //            case "2ˣ":
+                //                calculMath.setOperator("2ˣ")
+                ////                let result = try? calculMath.powerOfTwo(calculMath.currentOperand)
+                ////                if let result = result {
+                ////                    displayValue = formatResult(result)
+                ////                    calculMath.currentOperand = result
+                ////                    print("currentOperand after 2ˣ: \(calculMath.currentOperand)")
+                ////                } else {
+                ////                    displayValue = "Error"
+                ////                }
+                //                displayValue = formatResult(calculMath.currentOperand)
+                //
+                //                //            case "x³":
+                //                //                let result = calculMath.cube(calculMath.currentOperand)
+                //                //                displayValue = formatResult(result)
+                //                //                calculMath.currentOperand = result
+                //                //                calculMath.setOperator("x³")
+                //                //                print("currentOperand after x³: \(calculMath.currentOperand)")
                 
             case "2ˣ":
                 calculMath.setOperator("2ˣ")
-                let result = try? calculMath.powerOfTwo(calculMath.currentOperand)
+                displayValue = formatResult(calculMath.currentOperand)
+            case "x³":
+                calculMath.setOperator("x³")
+                let result = try? calculMath.cube(calculMath.currentOperand)
                 if let result = result {
                     displayValue = formatResult(result)
-                    calculMath.currentOperand = result
-                    print("currentOperand after 2ˣ: \(calculMath.currentOperand)")
+                    calculMath.currentOperand = result // Update currentOperand ONLY ONCE!
+                    print("currentOperand after x³: \(calculMath.currentOperand)")
                 } else {
                     displayValue = "Error"
                 }
-            case "x³":
-                let result = calculMath.cube(calculMath.currentOperand)
-                displayValue = formatResult(result)
-                calculMath.currentOperand = result
-                calculMath.setOperator("x³")
-                print("currentOperand after x³: \(calculMath.currentOperand)")
             case "1/x":
                 do {
                     let result = try calculMath.reciprocal(calculMath.currentOperand)

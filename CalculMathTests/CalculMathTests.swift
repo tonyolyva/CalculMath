@@ -156,43 +156,55 @@ class calculMathTests: XCTestCase {
         }
     }
     
+//    func testPowerOfTwo_PositiveInt() {
+//        if let result = try? calculMath.powerOfTwo(4) {
+//            XCTAssertEqual(result, 16, "Power Of Two Positive Int failed")
+//        }  else {
+//            XCTFail("powerOfTwo threw an error") // Or handle the error in a way that makes sense for your tests
+//        }
+//    }
     func testPowerOfTwo_PositiveInt() {
-        if let result = try? calculMath.powerOfTwo(4) {
+        do {
+            let result = try calculMath.powerOfTwo(4)
             XCTAssertEqual(result, 16, "Power Of Two Positive Int failed")
-        }  else {
-            XCTFail("powerOfTwo threw an error") // Or handle the error in a way that makes sense for your tests
+        } catch {
+            XCTFail("PowerOfTwo threw an error: \(error)")
         }
     }
-    
+
     func testPowerOfTwo_NegativeInt() {
-        if let result = try? calculMath.powerOfTwo(-4) {
+        do {
+            let result = try calculMath.powerOfTwo(-4)
             XCTAssertEqual(result, 0.0625, "Power Of Two Negative Int failed")
-        } else {
-            XCTFail("powerOfTwo threw an error") // Or handle the error in a way that makes sense for your tests
+        } catch {
+            XCTFail("PowerOfTwo threw an error: \(error)")
         }
     }
-    
+
     func testPowerOfTwo_Zero() {
-        if let result = try? calculMath.powerOfTwo(0) {
+        do {
+            let result = try calculMath.powerOfTwo(0)
             XCTAssertEqual(result, 1, "Power Of Two Zero failed")
-        } else {
-            XCTFail("powerOfTwo threw an error") // Or handle the error in a way that makes sense for your tests
+        } catch {
+            XCTFail("PowerOfTwo threw an error: \(error)")
         }
     }
-    
+
     func testPowerOfTwo_PositiveDouble() {
-        if let result = try? calculMath.powerOfTwo(5.5) {
+        do {
+            let result = try calculMath.powerOfTwo(5.5)
             XCTAssertEqual(result, 45.254834, accuracy: 0.000001, "Power Of Two Positive Double failed")
-        } else {
-            XCTFail("powerOfTwo threw an error") // Or handle the error in a way that makes sense for your tests
+        } catch {
+            XCTFail("PowerOfTwo threw an error: \(error)")
         }
     }
-    
+
     func testPowerOfTwo_NegativeDouble() {
-        if let result = try? calculMath.powerOfTwo(-2.5) {
+        do {
+            let result = try calculMath.powerOfTwo(-2.5)
             XCTAssertEqual(result, 0.1767766953, accuracy: 0.001, "Power Of Two Negative Double failed")
-        } else {
-            XCTFail("powerOfTwo threw an error") // Or handle the error in a way that makes sense for your tests
+        } catch {
+            XCTFail("PowerOfTwo threw an error: \(error)")
         }
     }
     
