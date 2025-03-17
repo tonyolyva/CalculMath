@@ -269,7 +269,8 @@ class CalculusUITests: XCTestCase {
         
         app.buttons["2"].firstMatch.tap()
         app.buttons["xʸ"].firstMatch.tap()
-        app.buttons["-3"].firstMatch.tap()
+        app.buttons["-"].firstMatch.tap()
+        app.buttons["3"].firstMatch.tap()
         app.buttons["="].firstMatch.tap()
         
         let displayText = app.staticTexts.element(matching: .any, identifier: "displayValue").label
@@ -279,7 +280,8 @@ class CalculusUITests: XCTestCase {
     func testExponentiationUI_NegativeIntPositiveIntResultNegativeInt() {
         let app = XCUIApplication()
         
-        app.buttons["-2"].firstMatch.tap()
+        app.buttons["-"].firstMatch.tap()
+        app.buttons["2"].firstMatch.tap()
         app.buttons["xʸ"].firstMatch.tap()
         app.buttons["3"].firstMatch.tap()
         app.buttons["="].firstMatch.tap()

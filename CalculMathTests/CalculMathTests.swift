@@ -56,12 +56,24 @@ class calculMathTests: XCTestCase {
         XCTAssertEqual(result, 0, "Addition with two zeros failed")
     }
     
+    //    func testSubtractionWithNegativeNumbers() {
+    //        calculMath.currentOperand = -3
+    //        calculMath.previousOperand = 5
+    //        calculMath.currentOperator = "-"
+    //        XCTAssertNoThrow(try calculMath.calculate())
+    //        XCTAssertEqual(calculMath.currentOperand, 8, "Subtraction with negative numbers test failed")
+    //    }
+    //
     func testSubtractionWithNegativeNumbers() {
-        calculMath.currentOperand = -3
-        calculMath.previousOperand = 5
-        calculMath.currentOperator = "-"
-        XCTAssertNoThrow(try calculMath.calculate())
-        XCTAssertEqual(calculMath.currentOperand, 8, "Subtraction with negative numbers test failed")
+        let calculator = CalculMath() // Create an instance of CalculMath
+        calculator.currentOperand = -3
+        calculator.previousOperand = 6
+        calculator.currentOperator = "-"
+        
+        XCTAssertNoThrow(try calculator.calculate())
+        
+        XCTAssertEqual(calculator.currentOperand, 9, "Subtraction with negative numbers test failed") // Corrected expected value
+        
     }
     
     func testDivision_1stPositiveInt2ndPositiveInt() {
@@ -76,6 +88,33 @@ class calculMathTests: XCTestCase {
     func testDivision_1stNegativeInt2ndPositiveInt() {
         let result = calculMath.divide(-10, 2)
         XCTAssertEqual(result, -5, "Division test 1st Negative Int 2nd Positive Int failed")
+    }
+    
+    func testAddition_operandsApproach() {
+        calculMath.currentOperand = 5
+        calculMath.previousOperand = 3
+        calculMath.currentOperator = "+"
+        XCTAssertNoThrow(try calculMath.calculate())
+        XCTAssertEqual(calculMath.currentOperand, 8)
+    }
+    
+    func testNegativeExponent_operandsApproach() {
+        calculMath.previousOperand = 2
+        calculMath.currentOperator = "^"
+        calculMath.inputDigit(-3)
+        calculMath.isExponentNegative = true
+        calculMath.inputDigit(3)
+        XCTAssertNoThrow(try calculMath.calculate())
+        XCTAssertEqual(calculMath.currentOperand, pow(2,-3))
+    }
+    
+    func testDivisionByZero_operandsApproach() {
+        calculMath.currentOperand = 0
+        calculMath.previousOperand = 5
+        calculMath.currentOperator = "/"
+        XCTAssertThrowsError(try calculMath.calculate()) { error in
+            XCTAssertEqual(error as? CalculMathError, CalculMathError.divisionByZero)
+        }
     }
     
     func testDivisionByZero() {
