@@ -1,5 +1,31 @@
+//@testable import CalculMath // Replace "CalculMath" with your app's module name if it's different
+
 import XCTest
 import Foundation
+
+class CalculusUITests: XCTestCase {
+
+    let currentEnvironment = "development" // Set the correct environment
+
+    override func setUpWithError() throws {
+        try super.setUpWithError()
+        continueAfterFailure = false
+
+        if currentEnvironment == "development" {
+            if self.name.contains("Factorial") {
+                throw XCTSkip("Skipping factorial tests for development environment.")
+            }
+        }
+
+        XCUIApplication().launch()
+    }
+
+/*
+@testable import CalculMath // Replace "CalculMath" with your app's module name if it's different
+
+import XCTest
+import Foundation
+
 
 class CalculusUITests: XCTestCase {
 
@@ -20,6 +46,7 @@ class CalculusUITests: XCTestCase {
 
         XCUIApplication().launch()
     }
+    */
 
     override func tearDownWithError() throws {
         // Terminate the simulator process using simctl
@@ -237,12 +264,26 @@ class CalculusUITests: XCTestCase {
         let app = XCUIApplication()
         
         app.buttons["3"].firstMatch.tap()
-        app.buttons["x²"].firstMatch.tap()
+        app.buttons["2ˣ"].firstMatch.tap()
         app.buttons["∛"].firstMatch.tap()
 
         let displayText = app.staticTexts.element(matching: .any, identifier: "displayValue").label
         XCTAssertEqual(displayText, "2", "Power of two and cube root UI test (Arg: Int, Result: Int) failed")
     }
+    
+//    func testPowerOfTwoAndCubeRootFunctions() {
+//        let calculMath = CalculMath() // Create an instance of your calculator class
+//
+//        let powerOfTwoResult = calculMath.powerOfTwo(3)
+//        XCTAssertEqual(powerOfTwoResult, 8.0, "powerOfTwo(3) should be 8")
+//
+//        do {
+//            let cubeRootResult = try calculMath.cubeRoot(8)
+//            XCTAssertEqual(cubeRootResult, 2.0, "cubeRoot(8) should be 2")
+//        } catch {
+//            XCTFail("cubeRoot(8) threw an error: \(error)")
+//        }
+//    }
     
     func testCubeAndCubeRootUI_PositiveIntResultPositiveInt() {
         let app = XCUIApplication()

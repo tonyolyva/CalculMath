@@ -42,6 +42,7 @@ class CalculMath {
         }
     }
     
+  /*
     func setOperator(_ op: String) {
         print("setOperator called with op: \(op)")
         if !inputBuffer.isEmpty {
@@ -77,6 +78,10 @@ class CalculMath {
         }
         if op == "1/x" || op == "x!" || op == "√" || op == "2ˣ" || op == "x³" || op == "∛" || op == "x²" {
             do {
+                if !inputBuffer.isEmpty {
+                    currentOperand = Double(inputBuffer) ?? 0
+                    inputBuffer = "" // Clear the input buffer
+                }
                 currentOperand = try performUnaryOperation(op)
                 print("currentOperand after \(op): \(currentOperand)")
             } catch {
@@ -112,90 +117,128 @@ class CalculMath {
             print("  currentOperator set to: \(currentOperator)")
         }
     }
+    */
+    
+ 
+
+    
+    func setOperator(_ op: String) {
+        print("setOperator called with op: \(op)")
+        print("  currentOperand: \(currentOperand), previousOperand: \(previousOperand), inputBuffer: \(inputBuffer)")
+        if !inputBuffer.isEmpty {
+            print("  inputBuffer: \(inputBuffer)")
+            if previousOperand == nil {
+                print("  currentOperand before setting previousOperand: \(currentOperand)")
+                previousOperand = currentOperand
+                print("  previousOperand set to: \(previousOperand)")
+            } else if currentOperator != nil {
+                currentOperand = Double(inputBuffer) ?? 0
+                if isNegative {
+                    currentOperand = -currentOperand
+                    isNegative = false
+                }
+                print("  currentOperand set to: \(currentOperand)")
+            } else {
+                currentOperand = Double(inputBuffer) ?? 0
+                if isNegative {
+                    currentOperand = -currentOperand
+                    isNegative = false
+                }
+                print("  currentOperand set to: \(currentOperand)")
+            }
+            inputBuffer = ""
+            isDecimal = false
+        }
+        decimalPlace = 10
+        if op == "-" && currentOperand == 0 && previousOperand == nil {
+            isNegative = true
+            print("  isNegative set to: \(isNegative)")
+        } else {
+            isNegative = false // reset isNegative here
+        }
+        if op == "1/x" || op == "x!" || op == "√" || op == "x³" || op == "x²" {
+            do {
+                if !inputBuffer.isEmpty {
+                    currentOperand = Double(inputBuffer) ?? 0
+                    inputBuffer = "" // Clear the input buffer
+                }
+                currentOperand = try performUnaryOperation(op)
+                print("currentOperand after \(op): \(currentOperand)")
+            } catch {
+                print("Error in unary operation: \(error)")
+            }
+        } else if op == "=" {
+            if previousOperand != nil, currentOperator != nil {
+                print("  previousOperand before calculate: \(previousOperand)")
+                print("  currentOperand before calculate: \(currentOperand)")
+                do {
+                    currentOperand = try calculate()
+                    print("  currentOperand after calculate: \(currentOperand)")
+                } catch {
+                    print("  Error in calculate: \(error)")
+                }
+                previousOperand = currentOperand
+                currentOperator = nil
+                print("  previousOperand after calculate: \(previousOperand)")
+                print("  currentOperator set to nil")
+            }
+        } else {
+            if previousOperand == nil && currentOperand != 0 {
+                previousOperand = currentOperand
+                print("  previousOperand set to currentOperand: \(previousOperand)")
+            } else if currentOperator != nil {
+                previousOperand = currentOperand
+                print("  previousOperand set to currentOperand because currentOperator exists: \(previousOperand)")
+            } else if !inputBuffer.isEmpty {
+                previousOperand = currentOperand
+                print("  previousOperand set to currentOperand because inputBuffer is not empty: \(previousOperand)")
+            }
+            currentOperator = op
+            print("  currentOperator set to: \(currentOperator)")
+        }
+        print("  currentOperand after setOperator: \(currentOperand), previousOperand: \(previousOperand), inputBuffer: \(inputBuffer)")
+    }
+    
+    
     
     /*
-     func setOperator(_ op: String) {
-     print("setOperator called with op: \(op)")
-     if !inputBuffer.isEmpty {
-     print("  inputBuffer: \(inputBuffer)")
-     
-     if previousOperand == nil {
-     print("  currentOperand before setting previousOperand: \(currentOperand)")
-     previousOperand = currentOperand
-     print("  previousOperand set to: \(previousOperand)")
-     }
-     
-     if currentOperator != nil {
-     print("  currentOperator: \(currentOperator)")
-     print("  previousOperand before calculate: \(previousOperand)")
-     print("  currentOperand before calculate: \(currentOperand)")
-     do {
-     currentOperand = try calculate()
-     print("  currentOperand after calculate: \(currentOperand)")
-     } catch {
-     print("  Error in calculate: \(error)")
-     }
-     
-     previousOperand = currentOperand
-     print("  previousOperand after calculate: \(previousOperand)")
-     } else {
-     currentOperand = Double(inputBuffer) ?? 0
-     if isNegative {
-     currentOperand = -currentOperand
-     isNegative = false
-     }
-     print("  currentOperand set to: \(currentOperand)")
-     }
-     inputBuffer = ""
-     isDecimal = false
-     }
-     decimalPlace = 10
-     
-     if op == "-" && currentOperand == 0 && previousOperand == nil {
-     isNegative = true
-     print("  isNegative set to: \(isNegative)")
-     } else {
-     isNegative = false // reset isNegative here
-     }
-     if op == "1/x" || op == "x!" || op == "√" || op == "2ˣ" || op == "x³" || op == "∛" || op == "x²" { // Added x² here.
-     do {
-     currentOperand = try performUnaryOperation(op)
-     print("currentOperand after \(op): \(currentOperand)")
-     } catch {
-     print("Error in unary operation: \(error)")
-     }
-     }
-     else if op == "=" {
-     if previousOperand != nil, currentOperator != nil {
-     print("  previousOperand before calculate: \(previousOperand)")
-     print("  currentOperand before calculate: \(currentOperand)")
-     do {
-     currentOperand = try calculate()
-     print("  currentOperand after calculate: \(currentOperand)")
-     } catch {
-     print("  Error in calculate: \(error)")
-     }
-     previousOperand = currentOperand
-     currentOperator = nil
-     print("  previousOperand after calculate: \(previousOperand)")
-     print("  currentOperator set to nil")
-     }
-     } else {
-     if previousOperand == nil && currentOperand != 0{
-     previousOperand = currentOperand
-     print("  previousOperand set to currentOperand: \(previousOperand)")
-     } else if currentOperator != nil {
-     previousOperand = currentOperand
-     print("  previousOperand set to currentOperand because currentOperator exists: \(previousOperand)")
-     } else if !inputBuffer.isEmpty {
-     previousOperand = currentOperand
-     print("  previousOperand set to currentOperand because inputBuffer is not empty: \(previousOperand)")
-     }
-     currentOperator = op
-     print("  currentOperator set to: \(currentOperator)")
-     }
-     }
-     */
+    func setOperator(_ op: String) {
+        print("setOperator called with op: \(op)")
+        if op == "2ˣ" || op == "∛" {
+            do {
+                if !inputBuffer.isEmpty {
+                    currentOperand = Double(inputBuffer) ?? 0
+                    inputBuffer = "" // Clear the input buffer
+                }
+                currentOperand = try performUnaryOperation(op)
+                print("currentOperand after \(op): \(currentOperand)")
+            } catch {
+                print("Error in unary operation: \(error)")
+            }
+        }
+    }
+*/
+    
+    /*
+    func performUnaryOperation(_ op: String) throws -> Double {
+        print("performUnaryOperation called with: \(op), currentOperand: \(currentOperand)")
+        switch op {
+        case "2ˣ":
+            print("  Before 2ˣ: \(currentOperand)")
+            let result = pow(2, currentOperand)
+            print("  After 2ˣ: \(result)")
+            return result
+        case "∛":
+            print("  Before ∛: \(currentOperand)")
+            let result = try cubeRoot(currentOperand)
+            print("  After ∛: \(result)")
+            return result
+        default:
+            return currentOperand
+        }
+    }
+    */
+    
     
     func calculate() throws -> Double {
         guard let op = currentOperator, let previous = previousOperand else {
@@ -232,8 +275,10 @@ class CalculMath {
         return currentOperand
     }
     
+    
     func performUnaryOperation(_ op: String) throws -> Double {
         print("performUnaryOperation called with: \(op), currentOperand: \(currentOperand)")
+
         switch op {
         case "1/x":
             return try reciprocal(currentOperand)
@@ -245,17 +290,27 @@ class CalculMath {
         case "√":
             return try squareRoot(currentOperand)
         case "2ˣ":
-            return pow(2, currentOperand)
+              print("  Before 2ˣ: \(currentOperand)")
+              let result = pow(2, currentOperand)
+              print("  After 2ˣ: \(result)")
+              return result
         case "x³":
             return cube(currentOperand)
         case "∛":
-            return try cubeRoot(currentOperand)
+            print("  Before ∛: \(currentOperand)")
+            let result = try cubeRoot(currentOperand)
+            print("  After ∛: \(result)")
+            return result
         case "x²": // Add this case
             return square(currentOperand)
         default:
             throw CalculMathError.invalidInput
         }
+        print("performUnaryOperation result: \(currentOperand)")
+
     }
+    
+    
     
     // MARK: - Basic Arithmetic Operations
     
@@ -295,11 +350,24 @@ class CalculMath {
         return x * x * x
     }
     
+    /*
     func cubeRoot(_ x: Double) throws -> Double {
         guard x >= 0 else {
             throw CalculMathError.invalidInput
         }
         return pow(x, 1.0 / 3.0)
+    }
+    */
+    
+    func cubeRoot(_ x: Double) throws -> Double {
+        print("cubeRoot called with: \(x)")
+
+        guard x >= 0 else {
+            throw CalculMathError.invalidInput
+        }
+        let result = pow(x, 1.0 / 3.0)
+        print("cubeRoot result: \(result)")
+        return result
     }
     
     func reciprocal(_ x: Double) throws -> Double {
@@ -321,14 +389,25 @@ class CalculMath {
         }
     }
     
+    // new
+    func powerOfTwo(_ x: Double) throws -> Double{
+        print("powerOfTwo called with: \(x)")
+        let result = pow(2, x)
+        print("powerOfTwo result: \(result)")
+        return result
+    }
+
+    /*
+    func powerOfTwo(_ x: Double) -> Double {
+        return pow(2, x)
+    }
+    */
     
     func powerOfTen(_ x: Double) -> Double {
         return pow(10, x)
     }
     
-    func powerOfTwo(_ x: Double) -> Double {
-        return pow(2, x)
-    }
+
     
     // MARK: - Clear
     func clear() {

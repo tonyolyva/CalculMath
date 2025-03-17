@@ -68,12 +68,33 @@ class CalculMathViewModel: ObservableObject {
                 } catch {
                     displayValue = "Error"
                 }
+//            case "2ˣ":
+//                let result = calculMath.powerOfTwo(calculMath.currentOperand)
+//                displayValue = formatResult(result)
+//                calculMath.currentOperand = result
+//                calculMath.setOperator("2ˣ")
+//                print("currentOperand after 2ˣ: \(calculMath.currentOperand)")
+//            case "2ˣ":
+//                if let result = try? calculMath.powerOfTwo(calculMath.currentOperand) {
+//                    displayValue = formatResult(result)
+//                    calculMath.currentOperand = result
+//                    calculMath.setOperator("2ˣ")
+//                    print("currentOperand after 2ˣ: \(calculMath.currentOperand)")
+//                } else {
+//                    // Handle the error (e.g., display an error message)
+//                    displayValue = "Error"
+//                }
+                
             case "2ˣ":
-                let result = calculMath.powerOfTwo(calculMath.currentOperand)
-                displayValue = formatResult(result)
-                calculMath.currentOperand = result
                 calculMath.setOperator("2ˣ")
-                print("currentOperand after 2ˣ: \(calculMath.currentOperand)")
+                let result = try? calculMath.powerOfTwo(calculMath.currentOperand)
+                if let result = result {
+                    displayValue = formatResult(result)
+                    calculMath.currentOperand = result
+                    print("currentOperand after 2ˣ: \(calculMath.currentOperand)")
+                } else {
+                    displayValue = "Error"
+                }
             case "x³":
                 let result = calculMath.cube(calculMath.currentOperand)
                 displayValue = formatResult(result)
