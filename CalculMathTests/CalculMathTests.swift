@@ -56,6 +56,14 @@ class calculMathTests: XCTestCase {
         XCTAssertEqual(result, 0, "Addition with two zeros failed")
     }
     
+    func testSubtractionWithNegativeNumbers() {
+        calculMath.currentOperand = -3
+        calculMath.previousOperand = 5
+        calculMath.currentOperator = "-"
+        XCTAssertNoThrow(try calculMath.calculate())
+        XCTAssertEqual(calculMath.currentOperand, 8, "Subtraction with negative numbers test failed")
+    }
+    
     func testDivision_1stPositiveInt2ndPositiveInt() {
         let result = calculMath.divide(10, 2)
         XCTAssertEqual(result, 5, "Divide test failed")
@@ -135,7 +143,6 @@ class calculMathTests: XCTestCase {
         }
     }
     
-    
     func testCubeRoot_PositiveInt() {
         do {
             let result = try calculMath.cubeRoot(8)
@@ -156,13 +163,6 @@ class calculMathTests: XCTestCase {
         }
     }
     
-//    func testPowerOfTwo_PositiveInt() {
-//        if let result = try? calculMath.powerOfTwo(4) {
-//            XCTAssertEqual(result, 16, "Power Of Two Positive Int failed")
-//        }  else {
-//            XCTFail("powerOfTwo threw an error") // Or handle the error in a way that makes sense for your tests
-//        }
-//    }
     func testPowerOfTwo_PositiveInt() {
         do {
             let result = try calculMath.powerOfTwo(4)
@@ -171,7 +171,7 @@ class calculMathTests: XCTestCase {
             XCTFail("PowerOfTwo threw an error: \(error)")
         }
     }
-
+    
     func testPowerOfTwo_NegativeInt() {
         do {
             let result = try calculMath.powerOfTwo(-4)
@@ -180,7 +180,7 @@ class calculMathTests: XCTestCase {
             XCTFail("PowerOfTwo threw an error: \(error)")
         }
     }
-
+    
     func testPowerOfTwo_Zero() {
         do {
             let result = try calculMath.powerOfTwo(0)
@@ -189,7 +189,7 @@ class calculMathTests: XCTestCase {
             XCTFail("PowerOfTwo threw an error: \(error)")
         }
     }
-
+    
     func testPowerOfTwo_PositiveDouble() {
         do {
             let result = try calculMath.powerOfTwo(5.5)
@@ -198,7 +198,7 @@ class calculMathTests: XCTestCase {
             XCTFail("PowerOfTwo threw an error: \(error)")
         }
     }
-
+    
     func testPowerOfTwo_NegativeDouble() {
         do {
             let result = try calculMath.powerOfTwo(-2.5)

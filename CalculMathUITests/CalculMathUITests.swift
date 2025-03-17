@@ -1,5 +1,3 @@
-//@testable import CalculMath // Replace "CalculMath" with your app's module name if it's different
-
 import XCTest
 import Foundation
 
