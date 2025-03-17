@@ -103,7 +103,7 @@ class CalculusUITests: XCTestCase {
     
     func testAdditionUI_1stNegativeDouble2ndPositiveDouble() {
         let app = XCUIApplication()
-        
+
         // 1st: "-2.4"
         // Tap "-"
         app.buttons["-"].tap()
@@ -113,10 +113,10 @@ class CalculusUITests: XCTestCase {
         app.buttons["."].tap()
         // Tap "4"
         app.buttons["4"].tap()
-        
+
         // operation "+"
         app.buttons["+"].tap()
-            
+
         // 2nd: "3.25"
         // Tap "3"
         app.buttons["3"].tap()
@@ -126,13 +126,13 @@ class CalculusUITests: XCTestCase {
         app.buttons["2"].tap()
         // Tap "5"
         app.buttons["5"].tap()
-        
+
         // calculation "="
         app.buttons["="].tap()
-        
+
         // Get the display text
         let displayText = app.staticTexts.element(matching: .any, identifier: "displayValue").label
-        
+
         // expected: 0.85
         // assert that the display shows correct result
         XCTAssertEqual(displayText, "0.85", "Addition UI test (1st Negative Double 2nd Positive Double) failed)")
@@ -142,7 +142,6 @@ class CalculusUITests: XCTestCase {
      let app = XCUIApplication()
         
         // 1st: "2.4"
-        app.buttons["-"].tap()
         // Tap "2"
         app.buttons["2"].tap()
         // Tap "."
