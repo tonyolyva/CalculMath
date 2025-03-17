@@ -47,14 +47,14 @@ class CalculMathViewModel: ObservableObject {
                 let result = calculMath.square(calculMath.currentOperand)
                 displayValue = formatResult(result)
                 calculMath.currentOperand = result
-                calculMath.setOperator("x²") // Add this line
+                calculMath.setOperator("x²")
                 print("currentOperand after x²: \(calculMath.currentOperand)")
             case "√":
                 do {
                     let result = try calculMath.squareRoot(calculMath.currentOperand)
                     displayValue = formatResult(result)
                     calculMath.currentOperand = result
-                    calculMath.setOperator("√") // Add this line
+                    calculMath.setOperator("√")
                 } catch {
                     displayValue = "Error"
                 }
@@ -63,7 +63,7 @@ class CalculMathViewModel: ObservableObject {
                     let result = try calculMath.cubeRoot(calculMath.currentOperand)
                     displayValue = formatResult(result)
                     calculMath.currentOperand = result
-                    calculMath.setOperator("∛") // Add this line
+                    calculMath.setOperator("∛")
                     print("currentOperand after ∛: \(calculMath.currentOperand)")
                 } catch {
                     displayValue = "Error"
@@ -72,20 +72,20 @@ class CalculMathViewModel: ObservableObject {
                 let result = calculMath.powerOfTwo(calculMath.currentOperand)
                 displayValue = formatResult(result)
                 calculMath.currentOperand = result
-                calculMath.setOperator("2ˣ") // Add this line
+                calculMath.setOperator("2ˣ")
                 print("currentOperand after 2ˣ: \(calculMath.currentOperand)")
             case "x³":
                 let result = calculMath.cube(calculMath.currentOperand)
                 displayValue = formatResult(result)
                 calculMath.currentOperand = result
-                calculMath.setOperator("x³") // Add this line
+                calculMath.setOperator("x³")
                 print("currentOperand after x³: \(calculMath.currentOperand)")
             case "1/x":
                 do {
                     let result = try calculMath.reciprocal(calculMath.currentOperand)
                     displayValue = formatResult(result)
                     calculMath.currentOperand = result
-                    calculMath.setOperator("1/x") // Add this line
+                    calculMath.setOperator("1/x")
                 } catch {
                     displayValue = "Error"
                 }
@@ -93,7 +93,7 @@ class CalculMathViewModel: ObservableObject {
                 let result = calculMath.powerOfTen(calculMath.currentOperand)
                 displayValue = formatResult(result)
                 calculMath.currentOperand = result
-                calculMath.setOperator("10ˣ") // Add this line
+                calculMath.setOperator("10ˣ")
                 print("currentOperand after 10ˣ: \(calculMath.currentOperand)")
             case "x!":
                 do {
@@ -101,7 +101,7 @@ class CalculMathViewModel: ObservableObject {
                     displayValue = String(result)
                     if let doubleResult = Double(result.description) {
                         calculMath.currentOperand = doubleResult
-                        calculMath.setOperator("x!") // Add this line
+                        calculMath.setOperator("x!")
                         print("currentOperand after x!: \(calculMath.currentOperand)")
                     } else {
                         displayValue = "Error"
