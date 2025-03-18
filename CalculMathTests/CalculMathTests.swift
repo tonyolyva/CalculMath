@@ -182,6 +182,19 @@ class calculMathTests: XCTestCase {
         }
     }
     
+    func testRepeatedSquareRoot() {
+        calculMath.inputBuffer = "65536"
+        calculMath.currentOperand = 65536
+        calculMath.setOperator("√")
+        XCTAssertEqual(calculMath.currentOperand, 256.0)
+
+        calculMath.setOperator("√")
+        XCTAssertEqual(calculMath.currentOperand, 16.0)
+
+        calculMath.setOperator("√")
+        XCTAssertEqual(calculMath.currentOperand, 4.0)
+    }
+    
     func testCubeRoot_PositiveInt() {
         do {
             let result = try calculMath.cubeRoot(8)

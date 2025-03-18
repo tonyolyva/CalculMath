@@ -19,6 +19,7 @@ class CalculMath {
     var exponent: Double?
     var previousOperatorWasExponent: Bool = false
     var isExponentNegative: Bool = false
+    var originalInput: Double? // Add this line
     
     init() {
         print("CalculMath initialized.")
@@ -36,10 +37,10 @@ class CalculMath {
                 if isExponentNegative {
                     exponent = -number
                     isExponentNegative = false
-                    inputBuffer = "-\(digit)" // Update inputBuffer here
+                    inputBuffer = "-\(digit)"
                 } else {
                     exponent = number
-                    inputBuffer = "\(digit)" // Update inputBuffer here
+                    inputBuffer = "\(digit)"
                 }
                 currentOperand = exponent!
                 print("  Exponent captured: \(exponent!)")
@@ -116,7 +117,7 @@ class CalculMath {
             previousOperatorWasExponent = true
         } else if op == "-" && previousOperatorWasExponent {
             // Treat as negative exponent
-            isExponentNegative = true // set negative flag
+            isExponentNegative = true
             inputBuffer = ""
         } else if op == "1/x" || op == "x!" || op == "√" || op == "x²" || op == "10ˣ" || op == "∛" {
             do {
@@ -126,6 +127,10 @@ class CalculMath {
                 currentOperand = result
                 print("  currentOperand after \(op): \(currentOperand)")
                 print("  currentOperand after assignment: \(currentOperand)")
+                if originalInput == nil {
+                    originalInput = Double(inputBuffer) ?? currentOperand
+                }
+                
             } catch {
                 print("Error in unary operation: \(error)")
             }
@@ -156,6 +161,7 @@ class CalculMath {
                 print("  previousOperand after calculate: \(previousOperand)")
                 print("  currentOperator set to nil")
             }
+            originalInput = nil
         } else if op == "-" {
             if previousOperand == nil {
                 isNegative = true
@@ -232,52 +238,87 @@ class CalculMath {
         return currentOperand
     }
     
+    /*
+     func performUnaryOperation(_ op: String) throws -> Double {
+     print("performUnaryOperation called with: \(op), currentOperand: \(currentOperand)")
+     
+     switch op {
+     case "1/x":
+     print("Before reciprocal: \(currentOperand)")
+     let result = try reciprocal(currentOperand)
+     print("After reciprocal: \(result)")
+     return result
+     case "x!":
+     if floor(currentOperand) != currentOperand || currentOperand < 0 {
+     throw CalculMathError.invalidInput
+     }
+     return Double(try factorial(Int(currentOperand)).description) ?? 0
+     case "√":
+     print("Before squareRoot: \(currentOperand)")
+     let result = try squareRoot(currentOperand)
+     print("After squareRoot: \(result)")
+     return result
+     case "2ˣ":
+     print("  Before 2ˣ: \(currentOperand)")
+     let result = pow(2, currentOperand)
+     print("  After 2ˣ: \(result)")
+     return result
+     case "x³":
+     return cube(currentOperand)
+     case "∛":
+     print("  Before ∛: \(currentOperand)")
+     let result = try cubeRoot(currentOperand)
+     print("  After ∛: \(result)")
+     return result
+     case "x²": // Add this case
+     return square(currentOperand)
+     case "10ˣ":
+     print("Before powerOfTen: \(currentOperand)")
+     let result = powerOfTen(currentOperand)
+     print("After powerOfTen: \(result)")
+     return result;
+     default:
+     throw CalculMathError.invalidInput
+     }
+     print("performUnaryOperation result: \(currentOperand)")
+     }
+     
+     */
+    
     func performUnaryOperation(_ op: String) throws -> Double {
         print("performUnaryOperation called with: \(op), currentOperand: \(currentOperand)")
-        
         switch op {
         case "1/x":
-            print("Before reciprocal: \(currentOperand)")
-            let result = try reciprocal(currentOperand)
-            print("After reciprocal: \(result)")
-            return result
-        case "x!":
-            if floor(currentOperand) != currentOperand || currentOperand < 0 {
-                throw CalculMathError.invalidInput
+            guard currentOperand != 0 else {
+                throw CalculMathError.divisionByZero
             }
-            return Double(try factorial(Int(currentOperand)).description) ?? 0
+            currentOperand = 1 / currentOperand
+        case "x!":
+            guard currentOperand >= 0 else {
+                throw CalculMathError.negativeFactorial
+            }
+            currentOperand = Double(try factorial(Int(currentOperand)))
         case "√":
-            print("Before squareRoot: \(currentOperand)")
-            let result = try squareRoot(currentOperand)
-            print("After squareRoot: \(result)")
-            return result
-        case "2ˣ":
-            print("  Before 2ˣ: \(currentOperand)")
-            let result = pow(2, currentOperand)
-            print("  After 2ˣ: \(result)")
-            return result
-        case "x³":
-            return cube(currentOperand)
-        case "∛":
-            print("  Before ∛: \(currentOperand)")
-            let result = try cubeRoot(currentOperand)
-            print("  After ∛: \(result)")
-            return result
-        case "x²": // Add this case
-            return square(currentOperand)
+            guard (originalInput ?? currentOperand) >= 0 else {
+                throw CalculMathError.invalidRoot
+            }
+            print("Before squareRoot: \(originalInput ?? currentOperand)")
+            currentOperand = sqrt(originalInput ?? currentOperand)
+            print("After squareRoot: \(currentOperand)")
+            originalInput = currentOperand
+        case "x²":
+            currentOperand = currentOperand * currentOperand
         case "10ˣ":
-            print("Before powerOfTen: \(currentOperand)")
-            let result = powerOfTen(currentOperand)
-            print("After powerOfTen: \(result)")
-            return result;
+            currentOperand = pow(10, currentOperand)
+        case "∛":
+            currentOperand = pow(currentOperand, 1/3)
+        case "2ˣ":
+            currentOperand = pow(2, currentOperand)
         default:
             throw CalculMathError.invalidInput
         }
-        print("performUnaryOperation result: \(currentOperand)")
+        return currentOperand
     }
-    
-    
-    
     
     
     // MARK: - Basic Arithmetic Operations
