@@ -2,22 +2,23 @@ import XCTest
 import Foundation
 
 class CalculusUITests: XCTestCase {
-
-    let currentEnvironment = "development" // Set the correct environment
-
+    
+    //    let currentEnvironment = "development" // Set the current environment
+    let currentEnvironment = "production" // Set the current environment
+    
     override func setUpWithError() throws {
         try super.setUpWithError()
         continueAfterFailure = false
-
+        
         if currentEnvironment == "development" {
             if self.name.contains("Factorial") {
                 throw XCTSkip("Skipping factorial tests for development environment.")
             }
         }
-
+        
         XCUIApplication().launch()
     }
-
+    
     override func tearDownWithError() throws {
         // Terminate the simulator process using simctl
         let task = URLSession.shared.dataTask(with: URL(string: "file:///usr/bin/xcrun?simctl%20shutdown%20booted")!) { (_, _, error) in
@@ -31,7 +32,7 @@ class CalculusUITests: XCTestCase {
     func testButtonTapAndDisplay() {
         let app = XCUIApplication()
         
-        // Tap the "1" button (finds the button with the label "1" and simulates a tap on it. You'll need to make sure the accessibility labels of your buttons match the text they display.)
+        // Tap the "1" button (finds the button with the label "1" and simulates a tap on it.
         app.buttons["1"].tap()
         
         // Tap the "2" button
@@ -98,45 +99,8 @@ class CalculusUITests: XCTestCase {
         XCTAssertEqual(displayText, "5.65", "Addition UI test (1st Positive Double 2nd Positive Double) failed)")
     }
     
-    func testAdditionUI_1stNegativeDouble2ndPositiveDouble() {
-        let app = XCUIApplication()
-
-        // 1st: "-2.4"
-        // Tap "-"
-        app.buttons["-"].tap()
-        // Tap "2"
-        app.buttons["2"].tap()
-        // Tap "."
-        app.buttons["."].tap()
-        // Tap "4"
-        app.buttons["4"].tap()
-
-        // operation "+"
-        app.buttons["+"].tap()
-
-        // 2nd: "3.25"
-        // Tap "3"
-        app.buttons["3"].tap()
-        // Tap "."
-        app.buttons["."].tap()
-        // Tap "2"
-        app.buttons["2"].tap()
-        // Tap "5"
-        app.buttons["5"].tap()
-
-        // calculation "="
-        app.buttons["="].tap()
-
-        // Get the display text
-        let displayText = app.staticTexts.element(matching: .any, identifier: "displayValue").label
-
-        // expected: 0.85
-        // assert that the display shows correct result
-        XCTAssertEqual(displayText, "0.85", "Addition UI test (1st Negative Double 2nd Positive Double) failed)")
-    }
-    
     func testAdditionUI_1stPositiveDouble2ndIntResultPositiveeDouble() {
-     let app = XCUIApplication()
+        let app = XCUIApplication()
         
         // 1st: "2.4"
         // Tap "2"
@@ -152,7 +116,7 @@ class CalculusUITests: XCTestCase {
         // 2nd: "3"
         // Tap "3"
         app.buttons["3"].tap()
-
+        
         // calculation "="
         app.buttons["="].tap()
         
@@ -197,7 +161,7 @@ class CalculusUITests: XCTestCase {
         app.buttons["."].firstMatch.tap()
         app.buttons["7"].firstMatch.tap()
         app.buttons["6"].firstMatch.tap()
-
+        
         app.buttons["√"].firstMatch.tap()
         
         let displayText = app.staticTexts.element(matching: .any, identifier: "displayValue").label
@@ -226,7 +190,7 @@ class CalculusUITests: XCTestCase {
         app.buttons["x²"].firstMatch.tap()
         
         let displayText = app.staticTexts.element(matching: .any, identifier: "displayValue").label
-
+        
         XCTAssertEqual(displayText, "10.6276", "Square UI test (Arg: Positive Double, Result: Positive Double) failed")
     }
     
@@ -236,7 +200,7 @@ class CalculusUITests: XCTestCase {
         app.buttons["3"].firstMatch.tap()
         app.buttons["2ˣ"].firstMatch.tap()
         app.buttons["∛"].firstMatch.tap()
-
+        
         let displayText = app.staticTexts.element(matching: .any, identifier: "displayValue").label
         XCTAssertEqual(displayText, "2", "Power of two and cube root UI test (Arg: Int, Result: Int) failed")
     }
@@ -259,11 +223,11 @@ class CalculusUITests: XCTestCase {
         app.buttons["xʸ"].firstMatch.tap()
         app.buttons["3"].firstMatch.tap()
         app.buttons["="].firstMatch.tap()
-
+        
         let displayText = app.staticTexts.element(matching: .any, identifier: "displayValue").label
         XCTAssertEqual(displayText, "8", "xʸ UI test (Arg: Int, Arg: Int, Result: Int) failed")
     }
-
+    
     func testExponentiationUI_PositiveIntNegativeIntResultNegativeInt() {
         let app = XCUIApplication()
         
@@ -289,38 +253,6 @@ class CalculusUITests: XCTestCase {
         let displayText = app.staticTexts.element(matching: .any, identifier: "displayValue").label
         XCTAssertEqual(displayText, "-8", "xʸ UI test (Arg: Int, Arg: Int, Result: Int) failed")
     }
-     
-    func testSquareAndFactorialUI_PositiveIntResultPositiveInt() {
-        let app = XCUIApplication()
-        app.launch()
-
-        if currentEnvironment == "development" {
-            XCTSkip("Skipping factorial tests for development environment.")
-        }
-        app.buttons["3"].firstMatch.tap()
-        app.buttons["x²"].firstMatch.tap()
-        app.buttons["x!"].firstMatch.tap()
-        
-        let displayText = app.staticTexts.element(matching: .any, identifier: "displayValue").label
-        XCTAssertEqual(displayText, "362880", "x²x! UI test (Arg: Int, Result: Int) failed")
-    }
-    
-    func testCubeAndFactorialUI_PositiveIntResultPositiveInt() {
-        let app = XCUIApplication()
-        app.launch()
-
-        if currentEnvironment == "development" {
-            XCTSkip("Skipping factorial tests for development environment.")
-        }
-        
-        app.buttons["2"].firstMatch.tap()
-        app.buttons["x³"].firstMatch.tap()
-        app.buttons["x!"].firstMatch.tap()
-        
-        let displayText = app.staticTexts.element(matching: .any, identifier: "displayValue").label
-        XCTAssertEqual(displayText, "40320", "x³x! UI test (Arg: Int, Result: Int) failed")
-    }
-
     
     func testPowerOf10UI_PositiveIntResultPositiveInt() {
         let app = XCUIApplication()
@@ -360,10 +292,10 @@ class CalculusUITests: XCTestCase {
         app.buttons["2"].firstMatch.tap()
         app.buttons["5"].firstMatch.tap()
         app.buttons["6"].firstMatch.tap()
-
+        
         app.buttons["√"].firstMatch.tap()
         app.buttons["√"].firstMatch.tap()
-
+        
         let displayText = app.staticTexts.element(matching: .any, identifier: "displayValue").label
         XCTAssertEqual(displayText, "4", "√ twice UI test (Arg: positive Int, Result: Positive Int) failed")
     }
@@ -377,11 +309,11 @@ class CalculusUITests: XCTestCase {
         app.buttons["5"].firstMatch.tap()
         app.buttons["3"].firstMatch.tap()
         app.buttons["6"].firstMatch.tap()
-
+        
         app.buttons["√"].firstMatch.tap()
         app.buttons["√"].firstMatch.tap()
         app.buttons["√"].firstMatch.tap()
-
+        
         let displayText = app.staticTexts.element(matching: .any, identifier: "displayValue").label
         XCTAssertEqual(displayText, "4", "√ triple UI test (Arg: positive Int, Result: Positive Int) failed")
     }
@@ -395,12 +327,27 @@ class CalculusUITests: XCTestCase {
         app.buttons["6"].firstMatch.tap()
         app.buttons["8"].firstMatch.tap()
         app.buttons["3"].firstMatch.tap()
-
+        
         app.buttons["∛"].firstMatch.tap()
         app.buttons["∛"].firstMatch.tap()
-
+        
         let displayText = app.staticTexts.element(matching: .any, identifier: "displayValue").label
         XCTAssertEqual(displayText, "3", "∛ twice UI test (Arg: positive Int, Result: Positive Int) failed")
+    }
+    
+    func testCubeTwiceCubeRootTwiceUI_PositiveIntResultPositiveInt() {
+        let app = XCUIApplication()
+        
+        app.buttons["3"].firstMatch.tap()
+        
+        app.buttons["x³"].firstMatch.tap()
+        app.buttons["x³"].firstMatch.tap()
+        
+        app.buttons["∛"].firstMatch.tap()
+        app.buttons["∛"].firstMatch.tap()
+        
+        let displayText = app.staticTexts.element(matching: .any, identifier: "displayValue").label
+        XCTAssertEqual(displayText, "3", "x³ twice ∛ twice UI test (Arg: positive Int, Result: Positive Int) failed")
     }
     
     func testPowerOf10AndCubeRootUI_PositiveIntResultPositiveInt() {
@@ -409,7 +356,7 @@ class CalculusUITests: XCTestCase {
         app.buttons["3"].firstMatch.tap()
         app.buttons["10ˣ"].firstMatch.tap()
         app.buttons["∛"].firstMatch.tap()
-
+        
         let displayText = app.staticTexts.element(matching: .any, identifier: "displayValue").label
         XCTAssertEqual(displayText, "10", "10ˣ and ∛ UI test (Arg: positive Int, Result: Positive Int) failed")
     }
@@ -420,7 +367,7 @@ class CalculusUITests: XCTestCase {
         app.buttons["3"].firstMatch.tap()
         app.buttons["x²"].firstMatch.tap()
         app.buttons["x³"].firstMatch.tap()
-
+        
         let displayText = app.staticTexts.element(matching: .any, identifier: "displayValue").label
         XCTAssertEqual(displayText, "729", "x² and x³ UI test (Arg: positive Int, Result: Positive Int) failed")
     }

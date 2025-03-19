@@ -3,6 +3,7 @@ import SwiftUI
 struct CalculMathView: View {
     @ObservedObject var viewModel = CalculMathViewModel()
     @State private var displayValue: String = "0"
+
     
     var body: some View {
         VStack {
@@ -14,7 +15,7 @@ struct CalculMathView: View {
                 .font(.title)
                 .accessibilityIdentifier("displayValue")
         }
-        
+
         VStack(spacing: 8) {
             VStack(spacing: 8) {
                 HStack(spacing: 8) {

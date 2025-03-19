@@ -1,153 +1,117 @@
-import Combine
 import SwiftUI
+import Foundation
 
 class CalculMathViewModel: ObservableObject {
     @Published var displayValue: String = "0"
     var calculMath = CalculMath()
-    var previousResult: Double? // Add previousResult property
+    var previousResult: Double?
     
-    func buttonPressed(button: String) {
-        print("buttonPressed: \(button)")
-        print("currentOperand before: \(calculMath.currentOperand)")
-        
-        if let digit = Int(button) {
-            calculMath.inputDigit(digit)
-            if let operand = Double(calculMath.inputBuffer) {
-                calculMath.currentOperand = operand
-                if calculMath.isNegative {
-                    calculMath.currentOperand = -calculMath.currentOperand
-                }
-                displayValue = formatOperand(calculMath.currentOperand)
-            }
-        } else {
-            switch button {
-            case "+", "-", "*", "/", "^":
-                if let previous = previousResult {
-                    calculMath.currentOperand = previous
-                    calculMath.inputBuffer = String(previous)
-                }
-                calculMath.setOperator(button)
-                previousResult = nil
-                displayValue = "0"
-            case "=":
-                do {
-                    print("previousResult before calculate: \(String(describing: previousResult))")
-                    print("currentOperand before calculate: \(calculMath.currentOperand)")
-                    let result = try calculMath.calculate()
-                    previousResult = result
-                    calculMath.currentOperand = result
-                    calculMath.inputBuffer = String(result)
-                    print("previousResult after calculate: \(String(describing: previousResult))")
-                    print("currentOperand after calculate: \(calculMath.currentOperand)")
-                    displayValue = formatResult(result)
-                } catch {
-                    displayValue = "Error"
-                }
-            case "x²":
-                let result = calculMath.square(calculMath.currentOperand)
-                displayValue = formatResult(result)
-                calculMath.currentOperand = result
-                calculMath.setOperator("x²")
-                print("currentOperand after x²: \(calculMath.currentOperand)")
-            case "√":
-                do {
-                    let result = try calculMath.squareRoot(calculMath.currentOperand)
-                    displayValue = formatResult(result)
-                    calculMath.currentOperand = result
-                    calculMath.setOperator("√")
-                } catch {
-                    displayValue = "Error"
-                }
-            case "∛":
-                do {
-                    let result = try calculMath.cubeRoot(calculMath.currentOperand)
-                    displayValue = formatResult(result)
-                    calculMath.currentOperand = result
-                    calculMath.setOperator("∛")
-                    print("currentOperand after ∛: \(calculMath.currentOperand)")
-                } catch {
-                    displayValue = "Error"
-                }                
-            case "2ˣ":
-                calculMath.setOperator("2ˣ")
-                displayValue = formatResult(calculMath.currentOperand)
-            case "x³":
-                calculMath.setOperator("x³")
-                let result = try? calculMath.cube(calculMath.currentOperand)
-                if let result = result {
-                    displayValue = formatResult(result)
-                    calculMath.currentOperand = result // Update currentOperand ONLY ONCE!
-                    print("currentOperand after x³: \(calculMath.currentOperand)")
-                } else {
-                    displayValue = "Error"
-                }
-            case "1/x":
-                do {
-                    let result = try calculMath.reciprocal(calculMath.currentOperand)
-                    displayValue = formatResult(result)
-                    calculMath.currentOperand = result
-                    calculMath.setOperator("1/x")
-                } catch {
-                    displayValue = "Error"
-                }
-            case "10ˣ":
-                let result = calculMath.powerOfTen(calculMath.currentOperand)
-                displayValue = formatResult(result)
-                calculMath.currentOperand = result
-                calculMath.setOperator("10ˣ")
-                print("currentOperand after 10ˣ: \(calculMath.currentOperand)")
-            case "x!":
-                do {
-                    let result = try calculMath.factorial(Int(calculMath.currentOperand))
-                    displayValue = String(result)
-                    if let doubleResult = Double(result.description) {
-                        calculMath.currentOperand = doubleResult
-                        calculMath.setOperator("x!")
-                        print("currentOperand after x!: \(calculMath.currentOperand)")
-                    } else {
-                        displayValue = "Error"
-                    }
-                } catch {
-                    displayValue = "Error"
-                }
-            case "C":
-                calculMath.clear()
-                displayValue = "0"
-                previousResult = nil
-            case ".":
-                calculMath.setDecimal()
-                if calculMath.isDecimal {
-                    if !calculMath.inputBuffer.contains(".") {
-                        calculMath.inputBuffer += "."
-                    }
-                    if let operand = Double(calculMath.inputBuffer) {
-                        calculMath.currentOperand = operand
-                        if calculMath.isNegative {
-                            calculMath.currentOperand = -calculMath.currentOperand
-                        }
-                        displayValue = formatOperand(calculMath.currentOperand)
-                    }
-                }
-            default:
-                break
-            }
-        }
-        print("currentOperand after: \(calculMath.currentOperand)")
-    }
     // MARK: - Helper Functions
     
     func formatOperand(_ operand: Double) -> String {
         let formatter = NumberFormatter()
         formatter.numberStyle = .decimal
-        formatter.maximumFractionDigits = 10 // Adjust as needed
-        let formattedString = formatter.string(from: NSNumber(value: operand)) ?? "0"
+        formatter.maximumFractionDigits = 10
+        formatter.alwaysShowsDecimalSeparator = false
+        formatter.usesGroupingSeparator = true
+        formatter.locale = Locale.current
+        
+        let formattedString = formatter.string(from: NSNumber(value: operand))! // Force unwrap
+        
         return formattedString
     }
     
     private func formatResult(_ result: Double) -> String {
         let formatter = NumberFormatter()
-        formatter.numberStyle = .decimal
+        formatter.numberStyle = NumberFormatter.Style.decimal // Explicitly specify the type
         formatter.maximumFractionDigits = 10
         return formatter.string(from: NSNumber(value: result)) ?? String(result)
+    }
+    
+    func buttonPressed(button: String) {
+        
+        if Int(button) != nil { // Changed if let digit to if Int(button) != nil
+            if calculMath.currentOperator == "^" && calculMath.exponent == nil {
+                if calculMath.isExponentNegative {
+                    calculMath.exponent = -Double(button)!
+                    calculMath.isExponentNegative = false
+                    calculMath.inputBuffer = "-\(button)"
+                } else {
+                    calculMath.exponent = Double(button)!
+                    calculMath.inputBuffer += String(button)
+                }
+                calculMath.currentOperand = Double(calculMath.inputBuffer) ?? 0.0
+                displayValue = formatOperand(calculMath.currentOperand)
+            } else {
+                calculMath.inputDigit(Int(button)!)
+                if let operand = Double(calculMath.inputBuffer) {
+                    displayValue = formatOperand(calculMath.currentOperand)
+                } else if calculMath.inputBuffer.hasPrefix("-") && calculMath.inputBuffer.count > 1 {
+                    if let operand = Double(calculMath.inputBuffer) {
+                        calculMath.currentOperand = operand
+                        displayValue = formatOperand(calculMath.currentOperand)
+                    }
+                } else {
+                    displayValue = "0"
+                }
+            }
+        } else {
+            switch button {
+            case "+", "-", "*", "/", "^":
+                if !(button == "-" && calculMath.currentOperand == 0 && calculMath.inputBuffer.isEmpty) {
+                    calculMath.setOperator(button, previousResult: &previousResult)
+                    calculMath.inputBuffer = ""
+                    calculMath.isDecimal = false
+                    calculMath.decimalPlace = 10
+                    displayValue = "0"
+                } else {
+                    calculMath.setOperator(button, previousResult: &previousResult)
+                    displayValue = "0"
+                }
+                break
+            case "=":
+                do {
+                    let result = try calculMath.calculate(previousResult: &previousResult)
+                    previousResult = result
+                    calculMath.currentOperand = result
+                    calculMath.inputBuffer = String(result)
+                    calculMath.currentOperator = nil
+                    if result.truncatingRemainder(dividingBy: 1) == 0 {
+                        displayValue = String(Int(result))
+                    } else {
+                        displayValue = String(result)
+                    }
+                } catch {
+                    displayValue = "Error"
+                }
+                break
+            case "C":
+                calculMath.clear()
+                displayValue = "0"
+                previousResult = nil
+                break
+            case ".":
+                calculMath.inputDecimal()
+                if let operand = Double(calculMath.inputBuffer) {
+                    calculMath.currentOperand = operand
+                    displayValue = formatOperand(calculMath.currentOperand)
+                } else {
+                    displayValue = calculMath.inputBuffer
+                }
+                break
+            case "√", "x²", "x³", "1/x", "x!", "10ˣ", "∛", "2ˣ":
+                do {
+                    let result = try calculMath.performUnaryOperation(button)
+                    calculMath.currentOperand = result
+                    calculMath.inputBuffer = String(result)
+                    displayValue = formatOperand(result)
+                } catch {
+                    displayValue = "Error"
+                }
+                break
+            default:
+                break
+            }
+        }
     }
 }
