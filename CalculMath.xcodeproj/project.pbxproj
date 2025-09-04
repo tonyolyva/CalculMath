@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		7627341D2D83CE18006CEAD0 /* BigInt in Frameworks */ = {isa = PBXBuildFile; productRef = 7627341C2D83CE18006CEAD0 /* BigInt */; };
+		76B260512E692DD400F187FC /* Jenkinsfile in Resources */ = {isa = PBXBuildFile; fileRef = 76B260502E692DC600F187FC /* Jenkinsfile */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -31,6 +32,7 @@
 		7667A6C02D83C5B000D7E4A8 /* CalculMath.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CalculMath.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7667A6D12D83C5B200D7E4A8 /* CalculMathTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CalculMathTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7667A6DB2D83C5B200D7E4A8 /* CalculMathUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CalculMathUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		76B260502E692DC600F187FC /* Jenkinsfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Jenkinsfile; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -87,6 +89,7 @@
 		7667A6B72D83C5B000D7E4A8 = {
 			isa = PBXGroup;
 			children = (
+				76B260502E692DC600F187FC /* Jenkinsfile */,
 				7667A6C22D83C5B000D7E4A8 /* CalculMath */,
 				7667A6D42D83C5B200D7E4A8 /* CalculMathTests */,
 				7667A6DE2D83C5B200D7E4A8 /* CalculMathUITests */,
@@ -229,6 +232,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				76B260512E692DD400F187FC /* Jenkinsfile in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
