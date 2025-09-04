@@ -4,34 +4,48 @@ pipeline {
   agent any
 
   stages {
+    stage('Clone Appium QA Repo') {
+      steps {
+        git url: 'https://github.com/tonyolyva/AppiumPythonProject.git', branch: 'main'
+      }
+    }
+
     stage('Install Dependencies') {
       steps {
-        sh '/Library/Frameworks/Python.framework/Versions/3.13/bin/pip install -r requirements.txt'
+        dir('AppiumPythonProject') {
+          sh '/Library/Frameworks/Python.framework/Versions/3.13/bin/pip install -r requirements.txt'
+        }
       }
     }
 
     stage('Run Tests') {
       steps {
-        sh 'cd ../AppiumPythonProject && ./run_tests.sh'
+        dir('AppiumPythonProject') {
+          sh './run_tests.sh'
+        }
       }
     }
 
     stage('Publish HTML Report') {
       steps {
-        publishHTML([
-          allowMissing: false,
-          alwaysLinkToLastBuild: true,
-          keepAll: true,
-          reportDir: 'reports',
-          reportFiles: 'report.html',
-          reportName: 'Appium Test Report'
-        ])
+        dir('AppiumPythonProject') {
+          publishHTML([
+            allowMissing: false,
+            alwaysLinkToLastBuild: true,
+            keepAll: true,
+            reportDir: 'reports',
+            reportFiles: 'report.html',
+            reportName: 'Appium Test Report'
+          ])
+        }
       }
     }
 
     stage('Archive Logs') {
       steps {
-        archiveArtifacts artifacts: 'appium.log', allowEmptyArchive: true
+        dir('AppiumPythonProject') {
+          archiveArtifacts artifacts: 'appium.log', allowEmptyArchive: true
+        }
       }
     }
   }
