@@ -30,7 +30,7 @@ pipeline {
           allowMissing: false,
           alwaysLinkToLastBuild: true,
           keepAll: true,
-          reportDir: 'AppiumPythonProject/reports',
+          reportDir: 'reports',
           reportFiles: 'report.html',
           reportName: 'Appium Test Report'
         ])
