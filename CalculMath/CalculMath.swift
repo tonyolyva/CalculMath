@@ -161,7 +161,8 @@ class CalculMath {
             let result = previous + currentOperand
             previousResult = result // Update previousResult
             return result
-        case "-":
+//        case "-":
+        case "--":
             let result = previous - currentOperand
             previousResult = result // Update previousResult
             return result
