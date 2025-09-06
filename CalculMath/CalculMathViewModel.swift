@@ -28,8 +28,9 @@ class CalculMathViewModel: ObservableObject {
         return formatter.string(from: NSNumber(value: result)) ?? String(result)
     }
     
-    func buttonPressed(button: String) {
-        
+//    func buttonPressed(button: String) {
+        func buttonPressed_(button: String) {
+
         if Int(button) != nil { // Changed if let digit to if Int(button) != nil
             if calculMath.currentOperator == "^" && calculMath.exponent == nil {
                 if calculMath.isExponentNegative {
@@ -59,7 +60,7 @@ class CalculMathViewModel: ObservableObject {
             switch button {
             case "+", "-", "*", "/", "^":
                 if !(button == "-" && calculMath.currentOperand == 0 && calculMath.inputBuffer.isEmpty) {
-//                    calculMath.setOperator(button, previousResult: &previousResult)
+                    calculMath.setOperator(button, previousResult: &previousResult)
                     calculMath.inputBuffer = ""
                     calculMath.isDecimal = false
                     calculMath.decimalPlace = 10
