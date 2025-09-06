@@ -1,7 +1,7 @@
 import SwiftUI
 
 @main
-struct CalculMathApp: App {
+struct CalculMathApp_: App {
     var body: some Scene {
         WindowGroup {
             CalculMathView()
