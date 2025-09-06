@@ -59,7 +59,7 @@ class CalculMathViewModel: ObservableObject {
             switch button {
             case "+", "-", "*", "/", "^":
                 if !(button == "-" && calculMath.currentOperand == 0 && calculMath.inputBuffer.isEmpty) {
-                    calculMath.setOperator(button, previousResult: &previousResult)
+//                    calculMath.setOperator(button, previousResult: &previousResult)
                     calculMath.inputBuffer = ""
                     calculMath.isDecimal = false
                     calculMath.decimalPlace = 10
