@@ -47,7 +47,8 @@ struct CalculMathView: View {
                 HStack(spacing: 8) {
                     CalculMathButton(text: "1", action: { viewModel.buttonPressed(button: "1") }, type: .number, size: .medium)
                     CalculMathButton(text: "2", action: { viewModel.buttonPressed(button: "2") }, type: .number, size: .medium)
-                    CalculMathButton(text: "3", action: { viewModel.buttonPressed(button: "3") }, type: .number, size: .medium)
+//                    CalculMathButton(text: "3", action: { viewModel.buttonPressed(button: "3") }, type: .number, size: .medium)
+                    CalculMathButton(text: ".", action: { viewModel.buttonPressed(button: ".") }, type: .number, size: .medium)
                     CalculMathButton(text: "*", action: { viewModel.buttonPressed(button: "*") }, type: .operation, size: .medium)
                 }
                 HStack(spacing: 8) {
