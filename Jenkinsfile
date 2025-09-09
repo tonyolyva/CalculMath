@@ -18,7 +18,7 @@ pipeline {
     always {
       echo '📦 CalculMath trigger complete'
       archiveArtifacts artifacts: 'AppiumPythonProject/reports/**/*.*', allowEmptyArchive: true
-      sh 'echo Dummy debug file' > AppiumPythonProject/reports/debug_from_jenkinsfile.txt
+      sh 'echo "Dummy debug file" > AppiumPythonProject/reports/debug_from_jenkinsfile.txt'
     }
   }
 }
