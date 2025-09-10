@@ -17,11 +17,10 @@ pipeline {
 
   post {
     always {
-      dir('AppiumPythonProject/reports/screenshots') {
-        sh '''
-          echo "Dummy screenshot placeholder" > screenshot_dummy.txt
-          echo "✅ Dummy screenshot created inside post block"
-        '''
+      script {
+        def markerFile = 'AppiumPythonProject/reports/screenshots/screenshot_test_marker.txt'
+        sh "echo '🧪 Screenshot marker file created from post block' > ${markerFile}"
+        echo "✅ Created ${markerFile}"
       }
       echo '📦 CalculMath trigger complete'
       archiveArtifacts artifacts: 'AppiumPythonProject/reports/**/*', allowEmptyArchive: true
