@@ -20,11 +20,9 @@ pipeline {
       sh '''
         mkdir -p AppiumPythonProject/reports/screenshots
         echo "Dummy screenshot placeholder" > AppiumPythonProject/reports/screenshots/screenshot_dummy.txt
-        echo "Dummy debug file" > AppiumPythonProject/reports/debug_from_jenkinsfile.txt
       '''
-      sh 'echo "Dummy debug file" > AppiumPythonProject/reports/debug_from_jenkinsfile.txt'
       echo '📦 CalculMath trigger complete'
-      archiveArtifacts artifacts: 'AppiumPythonProject/reports/**/*.*', allowEmptyArchive: true
+      archiveArtifacts artifacts: 'AppiumPythonProject/reports/**/*', allowEmptyArchive: true
     }
   }
 }
