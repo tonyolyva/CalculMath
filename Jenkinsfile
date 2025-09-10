@@ -9,7 +9,6 @@ pipeline {
           git url: 'https://github.com/tonyolyva/AppiumPythonProject.git', branch: 'main'
         }
         sh 'mkdir -p AppiumPythonProject/reports'
-        sh 'mkdir -p AppiumPythonProject/reports/screenshots'
         sh './AppiumPythonProject/run_tests.sh'
       }
     }
