@@ -80,7 +80,7 @@ class CalculMath {
             exponentBase = currentOperand
             isExponentPending = true
             currentOperator = op;
-        } else if op == "-_" && isExponentPending == true {
+        } else if op == "-" && isExponentPending == true {
             isExponentNegative = true
         } else if op == "1/x" || op == "x!" || op == "√" || op == "x²" || op == "10ˣ" || op == "∛" {
             do {
