@@ -164,8 +164,7 @@ class CalculMath {
         case "-":
             let result = previous - currentOperand
             previousResult = result // Update previousResult
-//            return result
-            return result + 1
+            return result
         case "*":
             let result = previous * currentOperand
             previousResult = result // Update previousResult
