@@ -28,7 +28,7 @@ class CalculMathViewModel: ObservableObject {
         return formatter.string(from: NSNumber(value: result)) ?? String(result)
     }
     
-    func buttonPressed_(button: String) {
+    func buttonPressed(button: String) {
         
         if Int(button) != nil { // Changed if let digit to if Int(button) != nil
             if calculMath.currentOperator == "^" && calculMath.exponent == nil {
