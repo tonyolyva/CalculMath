@@ -85,7 +85,7 @@ class CalculMath {
         } else if op == "1/x" || op == "x!" || op == "√" || op == "x²" || op == "10ˣ" || op == "∛" {
             do {
                 let result = try performUnaryOperation(op)
-                currentOperand = result
+                currentOperand = result + 1
                 if originalInput == nil {
                     originalInput = Double(inputBuffer) ?? currentOperand
                 }
