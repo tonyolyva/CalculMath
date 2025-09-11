@@ -63,7 +63,7 @@ class CalculMathViewModel: ObservableObject {
                     calculMath.inputBuffer = ""
                     calculMath.isDecimal = false
                     calculMath.decimalPlace = 10
-                    displayValue = "10"
+                    displayValue = "0"
                 } else {
                     calculMath.setOperator(button, previousResult: &previousResult)
                     displayValue = "0"
