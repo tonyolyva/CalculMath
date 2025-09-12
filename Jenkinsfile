@@ -13,6 +13,13 @@ pipeline {
           sh 'ls -la'
           sh 'pwd'
           sh 'python3 -m pip install --user -r requirements.txt || { echo "[CalculMath/Jenkinsfile] ❌ Failed to install Python dependencies"; exit 1; }'
+          sh 'echo "[CalculMath/Jenkinsfile] 📂 Current path before executing run_tests.sh:"'
+          sh 'pwd'
+          sh 'echo "[CalculMath/Jenkinsfile] 📄 Listing files in AppiumPythonProject:"'
+          sh 'ls -la'
+          sh 'echo "[CalculMath/Jenkinsfile] 📄 Contents of run_tests.sh (if exists):"'
+          sh 'cat run_tests.sh || echo "[CalculMath/Jenkinsfile] ❌ run_tests.sh not found"'
+          sh 'echo "[CalculMath/Jenkinsfile] ▶️ Attempting to execute run_tests.sh..."'
           echo '[CalculMath/Jenkinsfile] ▶️ Executing run_tests.sh...'
           sh './run_tests.sh'
         }
