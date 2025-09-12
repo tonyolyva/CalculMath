@@ -5,6 +5,8 @@ pipeline {
   stages {
     stage('Trigger Appium QA Tests') {
       steps {
+        echo '[CalculMath/Jenkinsfile] 🔁 Cleaning workspace...'
+        deleteDir() // This ensures a fresh checkout
         echo '[CalculMath/Jenkinsfile] 🚀 Triggering AppiumPythonProject pipeline...'
         git url: 'https://github.com/tonyolyva/AppiumPythonProject.git', branch: 'main'
         dir('AppiumPythonProject') {
