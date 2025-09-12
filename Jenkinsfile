@@ -27,15 +27,15 @@ pipeline {
     always {
       script {
         sh '''
-          mkdir -p AppiumPythonProject/reports/screenshots
-          echo '[CalculMath/Jenkinsfile] 🐛 DEBUG: Created screenshot marker' > AppiumPythonProject/reports/screenshots/screenshot_test_marker.txt
+          mkdir -p reports/screenshots
+          echo '[CalculMath/Jenkinsfile] 🐛 DEBUG: Created screenshot marker' > reports/screenshots/screenshot_test_marker.txt
         '''
         echo "✅ Created AppiumPythonProject/reports/screenshots/screenshot_test_marker.txt"
       }
-      sh 'python3 AppiumPythonProject/ai/collect_history.py "$WORKSPACE/AppiumPythonProject/reports/report.json"'
+      sh 'python3 ai/collect_history.py "$WORKSPACE/reports/report.json"'
       echo '[CalculMath/Jenkinsfile] ✅ CalculMath trigger complete'
       echo '[CalculMath/Jenkinsfile] 📂 Archiving artifacts from reports...'
-      archiveArtifacts artifacts: 'AppiumPythonProject/reports/**/*', allowEmptyArchive: true
+      archiveArtifacts artifacts: 'reports/**/*', allowEmptyArchive: true
       echo '[CalculMath/Jenkinsfile] 📁 Post-processing complete'
     }
   }
