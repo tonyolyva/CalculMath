@@ -26,9 +26,11 @@ pipeline {
   post {
     always {
       script {
-        def markerFile = 'AppiumPythonProject/reports/screenshots/screenshot_test_marker.txt'
-        sh "echo '🧪 Screenshot marker file created from post block' > ${markerFile}"
-        echo "✅ Created ${markerFile}"
+        sh '''
+          mkdir -p AppiumPythonProject/reports/screenshots
+          echo '[CalculMath/Jenkinsfile] 🐛 DEBUG: Created screenshot marker' > AppiumPythonProject/reports/screenshots/screenshot_test_marker.txt
+        '''
+        echo "✅ Created AppiumPythonProject/reports/screenshots/screenshot_test_marker.txt"
       }
       sh 'python3 AppiumPythonProject/ai/collect_history.py "$WORKSPACE/AppiumPythonProject/reports/report.json"'
       echo '[CalculMath/Jenkinsfile] ✅ CalculMath trigger complete'
