@@ -5,11 +5,11 @@ pipeline {
   stages {
     stage('Trigger Appium QA Tests') {
       steps {
+        git url: 'https://github.com/tonyolyva/AppiumPythonProject.git', branch: 'main'
         dir('AppiumPythonProject') {
-          git url: 'https://github.com/tonyolyva/AppiumPythonProject.git', branch: 'main'
+          sh 'mkdir -p reports'
+          sh './run_tests.sh'
         }
-        sh 'mkdir -p AppiumPythonProject/reports'
-        sh './AppiumPythonProject/run_tests.sh'
       }
     }
   }
