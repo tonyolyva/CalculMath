@@ -21,11 +21,7 @@ pipeline {
         sh "echo '🧪 Screenshot marker file created from post block' > ${markerFile}"
         echo "✅ Created ${markerFile}"
       }
-      stage('Collect AI History') {
-        steps {
-          sh 'python3 AppiumPythonProject/ai/collect_history.py "$WORKSPACE/AppiumPythonProject/reports/report.json"'
-        }
-      }
+      sh 'python3 AppiumPythonProject/ai/collect_history.py "$WORKSPACE/AppiumPythonProject/reports/report.json"'
       echo '📦 CalculMath trigger complete'
       archiveArtifacts artifacts: 'AppiumPythonProject/reports/**/*', allowEmptyArchive: true
     }
