@@ -5,6 +5,7 @@ pipeline {
   stages {
     stage('Trigger Appium QA Tests') {
       steps {
+        echo '[CalculMath/Jenkinsfile] 🚀 Triggering AppiumPythonProject pipeline...'
         git url: 'https://github.com/tonyolyva/AppiumPythonProject.git', branch: 'main'
         dir('AppiumPythonProject') {
           sh 'mkdir -p reports'
@@ -23,7 +24,8 @@ pipeline {
         echo "✅ Created ${markerFile}"
       }
       sh 'python3 AppiumPythonProject/ai/collect_history.py "$WORKSPACE/AppiumPythonProject/reports/report.json"'
-      echo '📦 CalculMath trigger complete'
+      echo '[CalculMath/Jenkinsfile] 📦 CalculMath trigger complete'
+      echo '[CalculMath/Jenkinsfile] 📂 Archiving artifacts from reports...'
       archiveArtifacts artifacts: 'AppiumPythonProject/reports/**/*', allowEmptyArchive: true
     }
   }
