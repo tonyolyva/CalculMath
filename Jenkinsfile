@@ -8,7 +8,7 @@ pipeline {
         git url: 'https://github.com/tonyolyva/AppiumPythonProject.git', branch: 'main'
         dir('AppiumPythonProject') {
           sh 'mkdir -p reports'
-          sh 'cd AppiumPythonProject && python3 -m pip install --user -r requirements.txt'
+          sh 'python3 -m pip install --user -r requirements.txt'
           sh './run_tests.sh'
         }
       }
