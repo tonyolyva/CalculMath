@@ -30,10 +30,8 @@ pipeline {
           mkdir -p reports/screenshots
           echo '[CalculMath/Jenkinsfile] 🐛 DEBUG: Created screenshot marker' > reports/screenshots/screenshot_test_marker.txt
         '''
-        echo "✅ Created AppiumPythonProject/reports/screenshots/screenshot_test_marker.txt"
+        echo "[CalculMath/Jenkinsfile] ✅ Created AppiumPythonProject/reports/screenshots/screenshot_test_marker.txt"
       }
-      // Remove existing history.csv to avoid duplication if present from repo
-      sh 'rm -f ai/history.csv'
       sh 'python3 ai/collect_history.py "$WORKSPACE/reports/report.json" >> ai/history.csv'
       echo '[CalculMath/Jenkinsfile] ✅ CalculMath trigger complete'
       echo '[CalculMath/Jenkinsfile] 📂 Archiving artifacts from reports...'
