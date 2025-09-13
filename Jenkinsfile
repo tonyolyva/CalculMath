@@ -36,6 +36,7 @@ pipeline {
       echo '[CalculMath/Jenkinsfile] ✅ CalculMath trigger complete'
       echo '[CalculMath/Jenkinsfile] 📂 Archiving artifacts from reports...'
       archiveArtifacts artifacts: 'reports/**/*', allowEmptyArchive: true
+      archiveArtifacts artifacts: 'ai/history.csv', allowEmptyArchive: true
       echo '[CalculMath/Jenkinsfile] 📁 Post-processing complete'
     }
   }
