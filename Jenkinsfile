@@ -32,7 +32,9 @@ pipeline {
         '''
         echo "✅ Created AppiumPythonProject/reports/screenshots/screenshot_test_marker.txt"
       }
-      sh 'python3 ai/collect_history.py "$WORKSPACE/reports/report.json"'
+      // Remove existing history.csv to avoid duplication if present from repo
+      sh 'rm -f ai/history.csv'
+      sh 'python3 ai/collect_history.py "$WORKSPACE/reports/report.json" >> ai/history.csv'
       echo '[CalculMath/Jenkinsfile] ✅ CalculMath trigger complete'
       echo '[CalculMath/Jenkinsfile] 📂 Archiving artifacts from reports...'
       archiveArtifacts artifacts: 'reports/**/*', allowEmptyArchive: true
