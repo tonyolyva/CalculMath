@@ -32,7 +32,8 @@ pipeline {
         '''
         echo "[CalculMath/Jenkinsfile] ✅ Created AppiumPythonProject/reports/screenshots/screenshot_test_marker.txt"
       }
-      sh 'sort -u ai/history.csv -o ai/history.csv'
+      sh 'sort -t \',\' -k3,3 --stable ai/history.csv | uniq > ai/history_sorted.csv && mv ai/history_sorted.csv ai/history.csv'
+      echo '[CalculMath/Jenkinsfile] 🔁 Deduplicated and sorted ai/history.csv by timestamp'
       echo '[CalculMath/Jenkinsfile] ✅ CalculMath trigger complete'
       echo '[CalculMath/Jenkinsfile] 📂 Archiving artifacts from reports...'
       archiveArtifacts artifacts: 'reports/**/*', allowEmptyArchive: true
