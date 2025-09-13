@@ -32,7 +32,6 @@ pipeline {
         '''
         echo "[CalculMath/Jenkinsfile] ✅ Created AppiumPythonProject/reports/screenshots/screenshot_test_marker.txt"
       }
-      sh 'python3 ai/collect_history.py "$WORKSPACE/reports/report.json"'
       sh 'sort -u ai/history.csv -o ai/history.csv'
       echo '[CalculMath/Jenkinsfile] ✅ CalculMath trigger complete'
       echo '[CalculMath/Jenkinsfile] 📂 Archiving artifacts from reports...'
