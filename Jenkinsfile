@@ -34,6 +34,16 @@ pipeline {
       }
       sh 'sort -t \',\' -k3,3 --stable ai/history.csv | uniq > ai/history_sorted.csv && mv ai/history_sorted.csv ai/history.csv'
       echo '[CalculMath/Jenkinsfile] 🔁 Deduplicated and sorted ai/history.csv by timestamp'
+
+      echo '[CalculMath/Jenkinsfile] ⬆️ Committing updated history.csv back to GitHub'
+      sh '''
+        git config user.name "tonyolyva-bot"
+        git config user.email "olyvatony@gmail.com"
+
+        git add ai/history.csv
+        git commit -m "🤖 Update history.csv after Jenkins run" || echo "[SKIP] No changes to commit"
+        git push origin main || echo "[ERROR] Git push failed — check credentials or branch state"
+      '''
       echo '[CalculMath/Jenkinsfile] ✅ CalculMath trigger complete'
       echo '[CalculMath/Jenkinsfile] 📂 Archiving artifacts from reports...'
       archiveArtifacts artifacts: 'reports/**/*', allowEmptyArchive: true
