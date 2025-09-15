@@ -15,6 +15,7 @@ pipeline {
   stages {
     stage('Trigger Appium QA Tests') {
       steps {
+        checkout scm
         echo '[CalculMath/Jenkinsfile] 🔁 Cleaning workspace...'
         deleteDir() // This ensures a fresh checkout
         echo '[CalculMath/Jenkinsfile] 🚀 Triggering AppiumPythonProject pipeline...'
