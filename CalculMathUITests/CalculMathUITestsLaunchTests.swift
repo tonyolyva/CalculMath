@@ -21,5 +21,3 @@ final class CalculMathUITestsLaunchTests: XCTestCase {
         add(attachment)
     }
 }
-
-
