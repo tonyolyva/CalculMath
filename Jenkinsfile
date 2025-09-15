@@ -10,7 +10,7 @@ pipeline {
 
   triggers {
     // This polling schedule will be ignored here and inherited from the Jenkins job
-    pollSCM('H/15 * * * *')
+    pollSCM('H/4 * * * *')
   }
 
   stages {
