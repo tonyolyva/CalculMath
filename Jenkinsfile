@@ -9,7 +9,8 @@ pipeline {
   }
 
   triggers {
-    pollSCM('H/15 * * * *')
+    // This polling schedule will be ignored here and inherited from the Jenkins job
+    pollSCM('')
   }
 
   stages {
@@ -19,7 +20,6 @@ pipeline {
         echo '[CalculMath/Jenkinsfile] 🔁 Cleaning workspace...'
         deleteDir() // This ensures a fresh checkout
         echo '[CalculMath/Jenkinsfile] 🚀 Triggering AppiumPythonProject pipeline...'
-        git url: 'https://github.com/tonyolyva/AppiumPythonProject.git', branch: 'main'
         sh 'mkdir -p reports'
         echo '[CalculMath/Jenkinsfile] 📦 Installing Python dependencies...'
         sh 'ls -la'
