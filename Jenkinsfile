@@ -10,7 +10,7 @@ pipeline {
 
   triggers {
     // This polling schedule will be ignored here and inherited from the Jenkins job
-    pollSCM('')
+    pollSCM('H/15 * * * *')
   }
 
   stages {
@@ -24,7 +24,7 @@ pipeline {
         echo '[CalculMath/Jenkinsfile] 📦 Installing Python dependencies...'
         sh 'ls -la'
         sh 'pwd'
-        sh 'python3 -m pip install --user -r requirements.txt || { echo "[CalculMath/Jenkinsfile] ❌ Failed to install Python dependencies"; exit 1; }'
+        sh 'python3 -m pip install --user -r AppiumPythonProject/requirements.txt || { echo "[CalculMath/Jenkinsfile] ❌ Failed to install Python dependencies"; exit 1; }'
         sh 'echo "[CalculMath/Jenkinsfile] 📂 Current path before executing run_tests.sh:"'
         sh 'pwd'
         sh 'echo "[CalculMath/Jenkinsfile] ▶️ Attempting to execute run_tests.sh..."'
