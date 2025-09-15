@@ -18,8 +18,7 @@ pipeline {
         }
 
         dir('AppiumPythonProject') {
-          echo '[CalculMath/Jenkinsfile] 🔁 Cleaning workspace...'
-          deleteDir() // This ensures a fresh checkout
+          echo '[CalculMath/Jenkinsfile] ✅ Repo cloned. Proceeding with test setup...'
           echo '[CalculMath/Jenkinsfile] 🚀 Triggering AppiumPythonProject pipeline...'
           sh 'mkdir -p reports'
           echo '[CalculMath/Jenkinsfile] 📦 Installing Python dependencies...'
