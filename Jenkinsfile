@@ -1,6 +1,4 @@
-// CalculMath/Jenkinsfile — just triggers Appium tests.
 pipeline {
-  echo "[CalculMath/Jenkinsfile] 📆 Trigger reason: ${currentBuild.rawBuild.getCauses()}"
   agent any
 
   options {
@@ -12,6 +10,9 @@ pipeline {
   stages {
     stage('Trigger Appium QA Tests') {
       steps {
+        script {
+          echo "[CalculMath/Jenkinsfile] 📆 Trigger reason: ${currentBuild.rawBuild.getCauses()}"
+        }
         checkout scm
 
         dir('AppiumPythonProject') {
