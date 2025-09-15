@@ -28,12 +28,13 @@ pipeline {
           sh 'echo "[CalculMath/Jenkinsfile] 📂 Verifying requirements.txt location..."'
           sh 'ls -la .'
           sh '''
-            echo "[CalculMath/Jenkinsfile] 📂 Checking for requirements.txt in AppiumPythonProject"
-            if [ -f AppiumPythonProject/requirements.txt ]; then
+            echo "[CalculMath/Jenkinsfile] 📂 Checking for requirements.txt in current directory"
+            if [ -f requirements.txt ]; then
               echo "[CalculMath/Jenkinsfile] ✅ Found requirements.txt"
-              pip install --user -r AppiumPythonProject/requirements.txt || { echo "[CalculMath/Jenkinsfile] ❌ Failed to install Python dependencies"; exit 1; }
+              pip install --user -r requirements.txt || { echo "[CalculMath/Jenkinsfile] ❌ Failed to install Python dependencies"; exit 1; }
             else
-              echo "[CalculMath/Jenkinsfile] ❌ requirements.txt not found at AppiumPythonProject/requirements.txt"
+              echo "[CalculMath/Jenkinsfile] ❌ requirements.txt not found in $(pwd)"
+              ls -la
               exit 1
             fi
           '''
@@ -78,5 +79,4 @@ pipeline {
     }
   }
 }
-
 
