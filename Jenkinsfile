@@ -2,6 +2,16 @@
 pipeline {
   agent any
 
+  options {
+    skipDefaultCheckout()
+    disableConcurrentBuilds()
+    buildDiscarder(logRotator(numToKeepStr: '10'))
+  }
+
+  triggers {
+    pollSCM('H/15 * * * *')
+  }
+
   stages {
     stage('Trigger Appium QA Tests') {
       steps {
