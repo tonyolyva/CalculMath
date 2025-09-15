@@ -1,4 +1,4 @@
-// CalculMath/Jenkinsfile — just triggers Appium tests
+// CalculMath/Jenkinsfile — just triggers Appium tests.
 pipeline {
   agent any
 
