@@ -11,7 +11,7 @@ pipeline {
     stage('Trigger Appium QA Tests') {
       steps {
         script {
-          echo "[CalculMath/Jenkinsfile] 📆 Trigger reason: ${currentBuild.rawBuild.getCauses()}"
+          echo "[CalculMath/Jenkinsfile] 📆 Trigger reason: ${currentBuild.getBuildCauses()}"
         }
         checkout scm
 
