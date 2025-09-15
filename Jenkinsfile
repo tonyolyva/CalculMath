@@ -30,7 +30,10 @@ pipeline {
             echo "[CalculMath/Jenkinsfile] 📂 Checking for requirements.txt in current directory"
             if [ -f requirements.txt ]; then
               echo "[CalculMath/Jenkinsfile] ✅ Found requirements.txt"
-              pip install --user -r requirements.txt || { echo "[CalculMath/Jenkinsfile] ❌ Failed to install Python dependencies"; exit 1; }
+              python3 -m pip install --user -r requirements.txt || {
+                echo "[CalculMath/Jenkinsfile] ❌ Failed to install Python dependencies"
+                exit 1
+              }
             else
               echo "[CalculMath/Jenkinsfile] ❌ requirements.txt not found in $(pwd)"
               ls -la
@@ -78,4 +81,3 @@ pipeline {
     }
   }
 }
-
