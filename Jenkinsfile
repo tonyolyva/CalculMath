@@ -7,25 +7,16 @@ pipeline {
     buildDiscarder(logRotator(numToKeepStr: '10'))
   }
 
+  triggers {
+    pollSCM('H/15 * * * *')
+  }
+
   stages {
     stage('Trigger Appium QA Tests') {
+      when {
+        changeset "**/*.swift", "**/*.xcodeproj", "**/*.xcworkspace"
+      }
       steps {
-        script {
-          def changeLogSets = currentBuild.changeSets
-          def hasChanges = false
-          for (changeSet in changeLogSets) {
-            for (entry in changeSet.items) {
-              echo "[CalculMath/Jenkinsfile] 📝 Change detected: ${entry.commitId} - ${entry.msg}"
-              hasChanges = true
-            }
-          }
-
-          if (!hasChanges) {
-            echo "[CalculMath/Jenkinsfile] ⏹ No actual source changes detected. Skipping downstream pipeline trigger."
-            currentBuild.result = 'SUCCESS'
-            return
-          }
-        }
         echo "[CalculMath/Jenkinsfile] 📆 Trigger reason: ${currentBuild.getBuildCauses()}"
         checkout scm
 
