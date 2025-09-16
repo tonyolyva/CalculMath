@@ -11,8 +11,22 @@ pipeline {
     stage('Trigger Appium QA Tests') {
       steps {
         script {
-          echo "[CalculMath/Jenkinsfile] 📆 Trigger reason: ${currentBuild.getBuildCauses()}"
+          def changeLogSets = currentBuild.changeSets
+          def hasChanges = false
+          for (changeSet in changeLogSets) {
+            for (entry in changeSet.items) {
+              echo "[CalculMath/Jenkinsfile] 📝 Change detected: ${entry.commitId} - ${entry.msg}"
+              hasChanges = true
+            }
+          }
+
+          if (!hasChanges) {
+            echo "[CalculMath/Jenkinsfile] ⏹ No actual source changes detected. Skipping downstream pipeline trigger."
+            currentBuild.result = 'SUCCESS'
+            return
+          }
         }
+        echo "[CalculMath/Jenkinsfile] 📆 Trigger reason: ${currentBuild.getBuildCauses()}"
         checkout scm
 
         dir('AppiumPythonProject') {
@@ -83,5 +97,4 @@ pipeline {
     }
   }
 }
-
 
