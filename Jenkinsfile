@@ -7,10 +7,6 @@ pipeline {
     buildDiscarder(logRotator(numToKeepStr: '10'))
   }
 
-  triggers {
-    pollSCM('H/15 * * * *')
-  }
-
   stages {
     stage('Trigger Appium QA Tests') {
       when {
