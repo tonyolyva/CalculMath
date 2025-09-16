@@ -371,6 +371,5 @@ class CalculusUITests: XCTestCase {
         let displayText = app.staticTexts.element(matching: .any, identifier: "displayValue").label
         XCTAssertEqual(displayText, "729", "x² and x³ UI test (Arg: positive Int, Result: Positive Int) failed")
     }
-    
 }
 
