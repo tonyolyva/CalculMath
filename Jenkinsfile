@@ -71,6 +71,15 @@ pipeline {
           git add ai/history.csv
           git commit -m "🤖 Update history.csv after Jenkins run" || echo "[SKIP] No changes to commit"
           git push origin main || echo "[ERROR] Git push failed — check credentials or branch state"
+
+          echo '[CalculMath/Jenkinsfile] ⬇️ Syncing updated history.csv to local clone...'
+          LOCAL_REPO_PATH="$HOME/Projects/AppiumPythonProject"
+          if [ -d "$LOCAL_REPO_PATH/ai" ]; then
+            cp ai/history.csv "$LOCAL_REPO_PATH/ai/history.csv"
+            echo "[CalculMath/Jenkinsfile] ✅ Copied history.csv to $LOCAL_REPO_PATH/ai/"
+          else
+            echo "[CalculMath/Jenkinsfile] ⚠️ Local clone not found at $LOCAL_REPO_PATH — skipping sync"
+          fi
         '''
         echo '[CalculMath/Jenkinsfile] ✅ CalculMath trigger complete'
         echo '[CalculMath/Jenkinsfile] 📂 Archiving artifacts from reports...'
