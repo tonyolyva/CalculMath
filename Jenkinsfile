@@ -14,7 +14,7 @@ pipeline {
   stages {
     stage('Trigger Appium QA Tests') {
       when {
-        changeset "**/*.swift", "**/*.xcodeproj", "**/*.xcworkspace"
+        changeset glob: "**/*.swift,**/*.xcodeproj,**/*.xcworkspace"
       }
       steps {
         echo "[CalculMath/Jenkinsfile] 📆 Trigger reason: ${currentBuild.getBuildCauses()}"
