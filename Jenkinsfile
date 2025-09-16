@@ -73,7 +73,7 @@ pipeline {
           git push origin main || echo "[ERROR] Git push failed — check credentials or branch state"
 
           echo '[CalculMath/Jenkinsfile] ⬇️ Syncing updated history.csv to local clone...'
-          LOCAL_REPO_PATH="$HOME/Projects/AppiumPythonProject"
+          LOCAL_REPO_PATH="/Users/Yutaka/Workspace/AppiumPythonProject"
           if [ -d "$LOCAL_REPO_PATH/ai" ]; then
             cp ai/history.csv "$LOCAL_REPO_PATH/ai/history.csv"
             echo "[CalculMath/Jenkinsfile] ✅ Copied history.csv to $LOCAL_REPO_PATH/ai/"
