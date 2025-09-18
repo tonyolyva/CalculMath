@@ -176,8 +176,8 @@ class CalculMath {
             }
             let result = previous / currentOperand
             previousResult = result // Update previousResult
-//            return result // uncomment for pass (after collect error will done)
-            return result - 1 // remove this line & uncomment the line above after failed test info is collected
+            return result // uncomment for pass (after collect error will done)
+//            return result - 1 // remove this line & uncomment the line above after failed test info is collected
         case "^":
             // This case should not be reached if isExponentPending is correctly handled
             throw CalculMathError.invalidInput
