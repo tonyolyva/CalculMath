@@ -208,8 +208,8 @@ class CalculMath {
             }
             currentOperand = 1 / currentOperand
         case "10ˣ":
-//            currentOperand = pow(10, currentOperand) // uncomment for pass (after collect error will done)
-            currentOperand = pow(1, currentOperand) // remove this line & uncomment the line above after failed test info is collected
+            currentOperand = pow(10, currentOperand) // uncomment for pass (after collect error will done)
+//            currentOperand = pow(1, currentOperand) // remove this line & uncomment the line above after failed test info is collected
         case "x!":
             if isNegative {
                 isNegative = false
