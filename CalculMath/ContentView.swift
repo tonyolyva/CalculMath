@@ -4,7 +4,6 @@ struct CalculMathView: View {
     @ObservedObject var viewModel = CalculMathViewModel()
     @State private var displayValue: String = "0"
 
-    
     var body: some View {
         VStack {
             Text(viewModel.displayValue)
