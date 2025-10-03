@@ -269,3 +269,4 @@ class CalculMath {
         inputBuffer = "0"
     }
 }
+
