@@ -45,7 +45,6 @@ The project includes unit tests and UI tests to ensure code quality and function
 * **Unit Tests:** Located in the `CalculwebTests` group. These tests verify the core calculator logic and calculations.
 * **UI Tests:** Located in the `CalculwebUITests` group. These tests verify the user interface's behavior and interactions.
 
-
 ## Contributing
 Contributions are welcome! If you find any issues or have suggestions for improvements, please feel free to open an issue or submit a pull request.
 
