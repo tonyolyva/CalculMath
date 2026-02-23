@@ -1,5 +1,5 @@
-# CalculMath - A Feature-Rich iOS Calculator
-CalculMath is a fully functional iOS calculator application built using Swift and SwiftUI. It supports basic arithmetic operations, unary functions, and advanced calculations. This project demonstrates clean architecture, test-driven development, and a user-friendly interface.
+# Calculweb - A Feature-Rich Web Calculator
+Calculweb is a fully functional web vers of calculator. It supports basic arithmetic operations, unary functions, and advanced calculations. This project demonstrates clean architecture, test-driven development, and a user-friendly interface.
 
 ## Features
 * **Basic Arithmetic Operations:** Addition, subtraction, multiplication, and division.
@@ -20,36 +20,12 @@ CalculMath is a fully functional iOS calculator application built using Swift an
 * **Test-Driven Development:** Includes unit tests and UI tests to ensure code quality.
 * **SwiftUI:** Built with SwiftUI for a modern and declarative UI.
 
-## Screenshots
-* **addition-positive-numbers**: 3 + 5 = 8 https://github.com/tonyolyva/CalculMath/blob/main/Screenshots/addition-positive-numbers.png
-* **clear-button**: C -> 0 https://github.com/tonyolyva/CalculMath/blob/main/Screenshots/clear-button.png
-* **division-by-zero-error**: 150 / 0 = ERROR https://github.com/tonyolyva/CalculMath/blob/main/Screenshots/division-by-zero-error.png
-* **exponentiation-calculation**: 2^15 = 32,768 https://github.com/tonyolyva/CalculMath/blob/main/Screenshots/exponentiation-calculation.png
-* **factorial-calculation**: 10! = 36288008 https://github.com/tonyolyva/CalculMath/blob/main/Screenshots/factorial-calculation.png
-* **multiplication-decimals**: 2.25 * 5.55 = 7.75 https://github.com/tonyolyva/CalculMath/blob/main/Screenshots/multiplication-decimals.png
-* **power-of-two-calculation**: 2 ^ 10 = 1,024 https://github.com/tonyolyva/CalculMath/blob/main/Screenshots/power-of-two-calculation.png
-* **square-operation**: 4 ^ 2 = 16 https://github.com/tonyolyva/CalculMath/blob/main/Screenshots/square-operation.png
-* **square-root-operation**: v 1024 = 32 https://github.com/tonyolyva/CalculMath/blob/main/Screenshots/square-root-operation.png
-* **subtraction-negative-numbers**: 120 - 25 = -45 https://github.com/tonyolyva/CalculMath/blob/main/Screenshots/subtraction-negative-numbers.png
-* **ui-tests-passed**: All UI tests Psss https://github.com/tonyolyva/CalculMath/blob/main/Screenshots/ui-tests-passed.png
-* **unit-tests-passed**: All Unit tests Pass https://github.com/tonyolyva/CalculMath/blob/main/Screenshots/.png
-
 ## Installation
 1.  **Clone the repository:**
 
     ```bash
-    git clone https://github.com/tonyolyva/CalculMath.git
+    git clone https://github.com/tonyolyva/Calculweb.git
     ```
-
-2.  **Open the project in Xcode:**
-
-    ```bash
-    open CalculMath.xcodeproj
-    ```
-
-3.  **Build and run the app:**
-    * Select a simulator or connect your iOS device.
-    * Press `Command + R` to build and run the app.
 
 ## Usage
 * **Basic Operations:** Use the number buttons to input values, and the operation buttons (+, -, \*, /) to perform calculations. Press "=" to get the result.
@@ -60,26 +36,15 @@ CalculMath is a fully functional iOS calculator application built using Swift an
 * **Clear:** Press the "C" button to clear the display and reset the calculator.
 
 ## Architecture
-* **`ContentView.swift`:** Contains the SwiftUI view for the calculator's UI.
-* **`CalculMathViewModel.swift`:** Manages the calculator's state and logic, acting as the ViewModel.
-* **`CalculMath.swift`:** Encapsulates the core calculator logic and calculations.
-* **`CalculMathButton.swift`:** Custom button used in the UI.
-* **`CalculMathTests`:** Unit tests to verify the calculator's functionality.
-* **`CalculMathUITests`:** UI tests to verify the user interface's behavior.
+* **`CalculwebTests`:** Unit tests to verify the calculator's functionality.
+* **`CalculwebUITests`:** UI tests to verify the user interface's behavior.
 
 ## Testing
 The project includes unit tests and UI tests to ensure code quality and functionality.
 
-* **Unit Tests:** Located in the `CalculMathTests` group. These tests verify the core calculator logic and calculations.
-* **UI Tests:** Located in the `CalculMathUITests` group. These tests verify the user interface's behavior and interactions.
+* **Unit Tests:** Located in the `CalculwebTests` group. These tests verify the core calculator logic and calculations.
+* **UI Tests:** Located in the `CalculwebUITests` group. These tests verify the user interface's behavior and interactions.
 
-To run the tests:
-1.  Open the project in Xcode.
-2.  Press `Command + U` to run all tests.
-
-## Dependencies
-* **SwiftUI:** Used for building the user interface.
-* **BigInt:** Used for handling large factorial calculations.
 
 ## Contributing
 Contributions are welcome! If you find any issues or have suggestions for improvements, please feel free to open an issue or submit a pull request.

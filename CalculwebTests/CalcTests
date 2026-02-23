@@ -1,0 +1,15 @@
+import pytest
+
+def test_sum_inp_pos_int_out_pos_int():
+    print("Basic validation that 3 + 2 = 5 in the CalculMath app")
+
+    try:
+        assert sum(2, 3) == 5
+    except Exception as e:
+        print(f"Exception during test execution {e}")
+        raise
+
+
+
+
+
