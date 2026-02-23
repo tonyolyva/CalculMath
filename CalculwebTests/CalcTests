@@ -9,7 +9,11 @@ def test_sum_inp_pos_int_out_pos_int():
         print(f"Exception during test execution {e}")
         raise
 
+def test_sum_inp_neg_int_out_neg_int():
+    print("Basic validation that -3 + 2 = -1 in the CalculMath app")
 
-
-
-
+    try:
+        assert sum(-3, 3) == -1
+    except Exception as e:
+        print(f"Exception during test execution {e}")
+        raise
